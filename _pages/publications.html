@@ -5,32 +5,30 @@ permalink: /publications/
 author_profile: true
 ---
 
+{% include base_path %}
+{% assign publications = site.data.publications.items %}
+
+<p>This page is intentionally data-driven. Add new papers in <code>_data/publications.yml</code>; the list below will update automatically.</p>
+
 {% if site.author.googlescholar %}
-  <div class="wordwrap">You can also find my articles on <a href="{{site.author.googlescholar}}">my Google Scholar profile</a>.</div>
+  <p>You can also find my articles on <a href="{{ site.author.googlescholar }}">Google Scholar</a>.</p>
 {% endif %}
 
-{% include base_path %}
-
-<!-- New style rendering if publication categories are defined -->
-{% if site.publication_category %}
-  {% for category in site.publication_category  %}
-    {% assign title_shown = false %}
-    {% for post in site.publications reversed %}
-      {% if post.category != category[0] %}
-        {% continue %}
+{% if publications.size > 0 %}
+  {% for publication in publications %}
+    <article class="publication-entry">
+      <h2>{{ publication.title }}</h2>
+      <p><strong>{{ publication.authors }}</strong></p>
+      <p>{{ publication.venue }}, {{ publication.year }}{% if publication.status %} - {{ publication.status }}{% endif %}</p>
+      {% if publication.links %}
+        <p>
+          {% for link in publication.links %}
+            <a href="{{ link.url }}">{{ link.label }}</a>{% unless forloop.last %} / {% endunless %}
+          {% endfor %}
+        </p>
       {% endif %}
-      {% unless title_shown %}
-        <h2>{{ category[1].title }}</h2><hr />
-        {% assign title_shown = true %}
-      {% endunless %}
-      {% include archive-single.html %}
-    {% endfor %}
+    </article>
   {% endfor %}
 {% else %}
-  {% for post in site.publications reversed %}
-    {% include archive-single.html %}
-  {% endfor %}
+  <p>No publications listed yet.</p>
 {% endif %}
-
-
-

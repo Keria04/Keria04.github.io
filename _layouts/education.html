@@ -1,0 +1,51 @@
+---
+layout: default
+---
+
+{% assign home = site.data.home %}
+
+<div id="main" role="main">
+  {% include sidebar.html %}
+
+  <article class="page">
+    <div class="page__inner-wrap">
+      <header>
+        <h1 class="page__title">{{ page.title }}</h1>
+      </header>
+
+      <section class="page__content home-section-page" itemprop="text">
+        <p class="home-section-page__lead">Degrees, academic background, and research direction.</p>
+
+        <h2>Academic Timeline</h2>
+        <div class="home-timeline">
+          {% for item in home.education %}
+            <article class="home-timeline__item">
+              <div class="home-timeline__period">{{ item.period }}</div>
+              <div class="home-timeline__content">
+                <h3>{{ item.degree }}</h3>
+                <p class="home-muted">{{ item.institution }}</p>
+                {% if item.details %}
+                  <ul>
+                    {% for detail in item.details %}
+                      <li>{{ detail }}</li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+              </div>
+            </article>
+          {% endfor %}
+        </div>
+
+        <h2>Research Interests</h2>
+        <div class="home-grid">
+          {% for item in home.research_interests %}
+            <article class="home-card">
+              <h3>{{ item.title }}</h3>
+              <p>{{ item.text }}</p>
+            </article>
+          {% endfor %}
+        </div>
+      </section>
+    </div>
+  </article>
+</div>

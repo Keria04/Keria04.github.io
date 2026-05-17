@@ -1,0 +1,109 @@
+---
+layout: default
+---
+
+{% include base_path %}
+{% assign home = site.data.home %}
+
+<main class="home" role="main">
+  <section class="home-hero"{% if home.profile.background_image and home.profile.background_image != "" %} style="background-image: linear-gradient(90deg, rgba(12, 18, 28, 0.72), rgba(12, 18, 28, 0.34)), url('{{ base_path }}/images/{{ home.profile.background_image }}');"{% endif %}>
+    <div class="home-hero__inner">
+      <div class="home-hero__copy">
+        <p class="home-kicker">{{ home.profile.location }}</p>
+        <h1>{{ home.profile.name }}</h1>
+        <p class="home-headline">{{ home.profile.headline }}</p>
+        <p class="home-summary">{{ home.profile.summary }}</p>
+        <div class="home-actions" aria-label="Primary links">
+          {% for link in home.hero_links %}
+            <a class="home-button{% if forloop.first %} home-button--primary{% endif %}" href="{% if link.url contains ':' %}{{ link.url }}{% else %}{{ link.url | relative_url }}{% endif %}">{{ link.label }}</a>
+          {% endfor %}
+        </div>
+      </div>
+      {% if home.profile.avatar %}
+        <img class="home-hero__avatar" src="{{ base_path }}/images/{{ home.profile.avatar }}" alt="{{ home.profile.name }}">
+      {% endif %}
+    </div>
+  </section>
+
+  <section class="home-section home-section--compact" aria-labelledby="spotlight-heading">
+    <div class="home-section__heading">
+      <p class="home-section__eyebrow">At a Glance</p>
+      <h2 id="spotlight-heading">What I want visitors to see first</h2>
+    </div>
+    <div class="home-grid home-grid--three">
+      {% for item in home.spotlight %}
+        <article class="home-card">
+          <p class="home-card__label">{{ item.label }}</p>
+          <p>{{ item.text }}</p>
+        </article>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="home-section" aria-labelledby="sections-heading">
+    <div class="home-section__heading">
+      <p class="home-section__eyebrow">Explore</p>
+      <h2 id="sections-heading">Main Sections</h2>
+    </div>
+    <div class="home-grid">
+      {% for section in home.sections %}
+        <a class="home-card home-card--link" href="{{ section.url | relative_url }}">
+          <p class="home-card__label">{{ section.label }}</p>
+          <h3>{{ section.title }}</h3>
+          <p>{{ section.text }}</p>
+        </a>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="home-section" aria-labelledby="notes-heading">
+    <div class="home-section__heading home-section__heading--split">
+      <div>
+        <p class="home-section__eyebrow">Notes</p>
+        <h2 id="notes-heading">Weekly Updates and Essays</h2>
+      </div>
+      <a class="home-text-link" href="{{ '/notes/' | relative_url }}">All notes</a>
+    </div>
+    {% if site.posts.size > 0 %}
+      <div class="home-list">
+        {% for post in site.posts limit:3 %}
+          <article class="home-list__item">
+            <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
+            <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+            {% if post.excerpt %}
+              <p>{{ post.excerpt | markdownify | strip_html | truncate: 180 }}</p>
+            {% endif %}
+          </article>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="home-empty">No notes yet. Add Markdown files to <code>_posts</code> using the format <code>YYYY-MM-DD-title.md</code>.</p>
+    {% endif %}
+  </section>
+
+  <section class="home-section" aria-labelledby="publications-heading">
+    <div class="home-section__heading home-section__heading--split">
+      <div>
+        <p class="home-section__eyebrow">Publications</p>
+        <h2 id="publications-heading">Papers and Preprints</h2>
+      </div>
+      <a class="home-text-link" href="{{ '/publications/' | relative_url }}">Publication list</a>
+    </div>
+    {% assign publications = site.data.publications.items %}
+    {% if publications.size > 0 %}
+      <div class="home-list">
+        {% for publication in publications limit:3 %}
+          <article class="home-list__item">
+            <time>{{ publication.year }}</time>
+            <h3>{{ publication.title }}</h3>
+            <p>{{ publication.authors }}</p>
+            <p class="home-muted">{{ publication.venue }}{% if publication.status %} - {{ publication.status }}{% endif %}</p>
+          </article>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="home-empty">Publication entries are ready. Add papers to <code>_data/publications.yml</code> when available.</p>
+    {% endif %}
+  </section>
+
+</main>
