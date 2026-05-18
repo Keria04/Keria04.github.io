@@ -60,25 +60,12 @@ layout: default
     <div class="home-section__heading home-section__heading--split">
       <div>
         <p class="home-section__eyebrow">Notes</p>
-        <h2 id="notes-heading">Weekly Updates and Essays</h2>
+        <h2 id="notes-heading">{{ home.notes.title }}</h2>
+        <p>{{ home.notes.description }}</p>
       </div>
       <a class="home-text-link" href="{{ '/notes/' | relative_url }}">All notes</a>
     </div>
-    {% if site.posts.size > 0 %}
-      <div class="home-list">
-        {% for post in site.posts limit:3 %}
-          <article class="home-list__item">
-            <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
-            <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
-            {% if post.excerpt %}
-              <p>{{ post.excerpt | markdownify | strip_html | truncate: 180 }}</p>
-            {% endif %}
-          </article>
-        {% endfor %}
-      </div>
-    {% else %}
-      <p class="home-empty">No notes yet. Add Markdown files to <code>_posts</code> using the format <code>YYYY-MM-DD-title.md</code>.</p>
-    {% endif %}
+    {% include notes-list.html limit=3 %}
   </section>
 
   <section class="home-section" aria-labelledby="publications-heading">

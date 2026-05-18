@@ -1,0 +1,18 @@
+{% assign note_limit = include.limit | default: site.posts.size %}
+{% assign empty_text = include.empty | default: site.data.home.notes.empty %}
+
+{% if site.posts.size > 0 %}
+  <div class="{{ include.wrapper | default: 'home-list' }}">
+    {% for post in site.posts limit: note_limit %}
+      <article class="{{ include.item_class | default: 'home-list__item' }}">
+        <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
+        <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+        {% if post.excerpt %}
+          <p>{{ post.excerpt | markdownify | strip_html | truncate: 180 }}</p>
+        {% endif %}
+      </article>
+    {% endfor %}
+  </div>
+{% else %}
+  <p class="home-empty">{{ empty_text }}</p>
+{% endif %}

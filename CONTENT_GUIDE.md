@@ -9,6 +9,7 @@ Edit `_data/home.yml`.
 - `profile`: main introduction, avatar, and optional hero background image.
 - `contact_links`: homepage Email/GitHub/ORCID links.
 - `sections`: the cards that link to the main pages.
+- `notes`: title, description, and empty-state text for the homepage Notes block and `/notes/`.
 - `education`: timeline entries.
 - `research_interests`: research cards.
 - `interests`: personal interest cards.
@@ -45,7 +46,7 @@ excerpt: "One short summary."
 ---
 ```
 
-The homepage automatically shows the latest three posts. The full list appears at `/notes/`.
+The homepage automatically shows the latest three posts. The full list appears at `/notes/`. Both places read from `_posts/`, so adding or editing a post updates them together after GitHub Pages rebuilds.
 
 You can copy `_drafts/weekly-note-template.md` when writing a weekly note. Rename the copy into `_posts/YYYY-MM-DD-title.md`.
 

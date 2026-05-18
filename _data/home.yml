@@ -42,6 +42,11 @@ sections:
     text: "Personal interests and broader learning directions."
     url: "/interests/"
 
+notes:
+  title: "Weekly Updates and Essays"
+  description: "Weekly reviews, research reflections, and technical notes."
+  empty: "No notes yet. Add Markdown files to _posts using the format YYYY-MM-DD-title.md."
+
 education:
   - degree: "B.Eng. in Software Engineering"
     institution: "South China University of Technology"
