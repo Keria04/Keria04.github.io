@@ -3,9 +3,7 @@ profile:
   headline: "Undergraduate student in Software Engineering and Business Administration"
   location: "South China University of Technology, China"
   summary: >-
-    I am interested in reliable multimodal systems, visual grounding, and the
-    practical engineering needed to make research ideas usable. This site is a
-    compact home for my academic trajectory, research notes, selected projects,
+    This site is a compact home for my academic trajectory, research notes, selected projects,
     and interests.
   background_image: ""
   avatar: "profile.png"
@@ -39,29 +37,17 @@ sections:
 education:
   - degree: "B.Eng. in Software Engineering"
     institution: "South China University of Technology"
-    period: "2022 - Present"
-    details:
-      - "Core training in software systems, algorithms, and applied engineering."
-      - "Current research interest: visual grounding and multimodal systems."
-  - degree: "B.A. in Business Administration, Dual Degree"
-    institution: "South China University of Technology"
     period: "2023 - Present"
     details:
-      - "Training in management, organizations, and product-oriented thinking."
-      - "Useful background for turning technical work into practical systems."
+      - "Core training in programming, algorithms, and applied engineering."
 
 research_interests:
   - title: "Visual Grounding"
     text: "Improving localization precision and robustness in complex visual scenes."
   - title: "Multimodal Learning"
     text: "Understanding how language and vision models align, fail, and can be evaluated."
-  - title: "Research Engineering"
-    text: "Building reproducible experiments, readable systems, and tools that make iteration faster."
 
 interests:
-  - title: "Writing"
-    text: "Weekly reviews, research reflections, and notes from papers or projects."
-  - title: "Building"
-    text: "Small tools, websites, experiments, and interfaces that make ideas concrete."
-  - title: "Long-form Learning"
-    text: "Connecting technical depth with broader questions in product, organizations, and society."
+  - title: "Anime"
+    text: "Enthusiastic about wonderful characters and touching plots."
+
