@@ -6,7 +6,7 @@ profile:
     This site is a compact home for my academic trajectory, research notes, selected projects,
     and interests.
   background_image: "Frieren_background.jpeg"
-  avatar: "profile.png"
+  avatar: "avatar.png"
 
 hero_links:
   - label: "Education"
