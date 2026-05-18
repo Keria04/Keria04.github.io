@@ -26,6 +26,11 @@ talkmap_link: false
 comments:
   provider:
 
+collections:
+  publications:
+    output: true
+    permalink: /publications/:path/
+
 atom_feed:
   hide: false
   path:
@@ -87,6 +92,12 @@ defaults:
       type: pages
     values:
       layout: single
+      author_profile: true
+  - scope:
+      path: ""
+      type: publications
+    values:
+      layout: publication
       author_profile: true
 
 sass:

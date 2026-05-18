@@ -18,14 +18,6 @@ hero_links:
   - label: "Publications"
     url: "/publications/"
 
-spotlight:
-  - label: "Current Focus"
-    text: "Visual grounding and multimodal understanding in complex scenes."
-  - label: "Academic Direction"
-    text: "Preparing for PhD applications and building a research-oriented portfolio."
-  - label: "Site Updates"
-    text: "Weekly notes, research reflections, and technical write-ups will live in Notes."
-
 sections:
   - title: "Education"
     label: "Academic Timeline"

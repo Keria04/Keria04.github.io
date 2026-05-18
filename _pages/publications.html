@@ -6,29 +6,35 @@ author_profile: true
 ---
 
 {% include base_path %}
-{% assign publications = site.data.publications.items %}
+{% assign publications = site.publications | sort: "year" | reverse %}
 
-<p>This page is intentionally data-driven. Add new papers in <code>_data/publications.yml</code>; the list below will update automatically.</p>
+<p>Selected papers, preprints, and research projects. Add a Markdown file in <code>_publications</code> for each new item.</p>
 
 {% if site.author.googlescholar %}
   <p>You can also find my articles on <a href="{{ site.author.googlescholar }}">Google Scholar</a>.</p>
 {% endif %}
 
 {% if publications.size > 0 %}
-  {% for publication in publications %}
-    <article class="publication-entry">
-      <h2>{{ publication.title }}</h2>
-      <p><strong>{{ publication.authors }}</strong></p>
-      <p>{{ publication.venue }}, {{ publication.year }}{% if publication.status %} - {{ publication.status }}{% endif %}</p>
-      {% if publication.links %}
-        <p>
-          {% for link in publication.links %}
-            <a href="{{ link.url }}">{{ link.label }}</a>{% unless forloop.last %} / {% endunless %}
-          {% endfor %}
-        </p>
-      {% endif %}
-    </article>
-  {% endfor %}
+  <div class="publication-grid">
+    {% for publication in publications %}
+      <a class="publication-card" href="{{ publication.url | relative_url }}">
+        <div class="publication-card__media">
+          {% if publication.image %}
+            <img src="{{ publication.image | relative_url }}" alt="">
+          {% else %}
+            <span>{{ publication.year | default: "Paper" }}</span>
+          {% endif %}
+        </div>
+        <div class="publication-card__body">
+          <p class="publication-card__meta">{{ publication.venue }}{% if publication.year %}, {{ publication.year }}{% endif %}</p>
+          <h2>{{ publication.title }}</h2>
+          {% if publication.excerpt %}
+            <p>{{ publication.excerpt | markdownify | strip_html }}</p>
+          {% endif %}
+        </div>
+      </a>
+    {% endfor %}
+  </div>
 {% else %}
   <p>No publications listed yet.</p>
 {% endif %}

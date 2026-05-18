@@ -1,0 +1,47 @@
+---
+layout: default
+---
+
+{% include base_path %}
+
+<div id="main" role="main">
+  {% include sidebar.html %}
+
+  <article class="page publication-detail" itemscope itemtype="http://schema.org/ScholarlyArticle">
+    <div class="page__inner-wrap">
+      <header>
+        <p class="publication-card__meta">{{ page.venue }}{% if page.year %}, {{ page.year }}{% endif %}{% if page.status %} - {{ page.status }}{% endif %}</p>
+        <h1 class="page__title" itemprop="headline">{{ page.title }}</h1>
+        {% if page.authors %}
+          <p class="publication-detail__authors">{{ page.authors }}</p>
+        {% endif %}
+      </header>
+
+      {% if page.image %}
+        <div class="publication-detail__image">
+          <img src="{{ page.image | relative_url }}" alt="">
+        </div>
+      {% endif %}
+
+      <section class="page__content" itemprop="text">
+        {% if page.abstract %}
+          <h2>Abstract</h2>
+          <p>{{ page.abstract }}</p>
+        {% endif %}
+
+        {% if page.paper_url or page.code_url or page.project_url or page.data_url or page.slides_url %}
+          <h2>Links</h2>
+          <p class="publication-detail__links">
+            {% if page.paper_url %}<a href="{{ page.paper_url }}">Paper</a>{% endif %}
+            {% if page.code_url %}<a href="{{ page.code_url }}">Code</a>{% endif %}
+            {% if page.project_url %}<a href="{{ page.project_url }}">Project</a>{% endif %}
+            {% if page.data_url %}<a href="{{ page.data_url }}">Data</a>{% endif %}
+            {% if page.slides_url %}<a href="{{ page.slides_url }}">Slides</a>{% endif %}
+          </p>
+        {% endif %}
+
+        {{ content }}
+      </section>
+    </div>
+  </article>
+</div>

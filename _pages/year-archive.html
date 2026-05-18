@@ -20,4 +20,6 @@ redirect_from:
     {% capture written_year %}{{ year }}{% endcapture %}
   {% endif %}
   {% include archive-single.html %}
+{% else %}
+  <p>No notes yet.</p>
 {% endfor %}

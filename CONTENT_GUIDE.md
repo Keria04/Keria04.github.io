@@ -7,7 +7,6 @@ This site is set up so regular updates do not require changing layout code.
 Edit `_data/home.yml`.
 
 - `profile`: main introduction, avatar, and optional hero background image.
-- `spotlight`: the three items shown near the top of the homepage.
 - `sections`: the cards that link to the main pages.
 - `education`: timeline entries.
 - `research_interests`: research cards.
@@ -45,6 +44,8 @@ excerpt: "One short summary."
 
 The homepage automatically shows the latest three posts. The full list appears at `/notes/`.
 
+You can copy `_drafts/weekly-note-template.md` when writing a weekly note. Rename the copy into `_posts/YYYY-MM-DD-title.md`.
+
 ## Section Pages
 
 - `/education/` is generated from `education` and `research_interests` in `_data/home.yml`.
@@ -53,23 +54,35 @@ The homepage automatically shows the latest three posts. The full list appears a
 
 ## Publications
 
-Edit `_data/publications.yml`. Add a new item under `items`:
+Add one Markdown file per paper in `_publications/`:
 
-```yaml
-items:
-  - title: "Paper Title"
-    authors: "Yile Cai, Coauthor Name"
-    venue: "Conference or Journal"
-    year: "2026"
-    status: "Under review"
-    links:
-      - label: "PDF"
-        url: "/files/paper.pdf"
-      - label: "Code"
-        url: "https://github.com/Keria04/project"
+```text
+_publications/2026-paper-title.md
 ```
 
-The homepage and `/publications/` page update automatically.
+Use this front matter:
+
+```yaml
+---
+title: "Paper Title"
+authors: "Yile Cai, Coauthor Name"
+venue: "Conference or Journal"
+year: 2026
+status: "Under review"
+image: "/images/paper-thumbnail.jpg"
+excerpt: "One or two sentences shown on the publication list."
+abstract: "The abstract shown on the detail page."
+paper_url: "https://example.com/paper.pdf"
+code_url: "https://github.com/Keria04/project"
+project_url: "https://example.com/project"
+data_url:
+slides_url:
+---
+```
+
+Only links with values are shown. The homepage, `/publications/`, and the paper detail page update automatically.
+
+You can copy `_drafts/publication-template.md` when adding a new publication.
 
 ## Appearance
 

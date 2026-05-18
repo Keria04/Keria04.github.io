@@ -25,22 +25,7 @@ layout: default
     </div>
   </section>
 
-  <section class="home-section home-section--compact" aria-labelledby="spotlight-heading">
-    <div class="home-section__heading">
-      <p class="home-section__eyebrow">At a Glance</p>
-      <h2 id="spotlight-heading">What I want visitors to see first</h2>
-    </div>
-    <div class="home-grid home-grid--three">
-      {% for item in home.spotlight %}
-        <article class="home-card">
-          <p class="home-card__label">{{ item.label }}</p>
-          <p>{{ item.text }}</p>
-        </article>
-      {% endfor %}
-    </div>
-  </section>
-
-  <section class="home-section" aria-labelledby="sections-heading">
+  <section class="home-section home-section--compact" aria-labelledby="sections-heading">
     <div class="home-section__heading">
       <p class="home-section__eyebrow">Explore</p>
       <h2 id="sections-heading">Main Sections</h2>
@@ -89,20 +74,30 @@ layout: default
       </div>
       <a class="home-text-link" href="{{ '/publications/' | relative_url }}">Publication list</a>
     </div>
-    {% assign publications = site.data.publications.items %}
+    {% assign publications = site.publications | sort: "year" | reverse %}
     {% if publications.size > 0 %}
-      <div class="home-list">
+      <div class="publication-grid publication-grid--compact">
         {% for publication in publications limit:3 %}
-          <article class="home-list__item">
-            <time>{{ publication.year }}</time>
-            <h3>{{ publication.title }}</h3>
-            <p>{{ publication.authors }}</p>
-            <p class="home-muted">{{ publication.venue }}{% if publication.status %} - {{ publication.status }}{% endif %}</p>
-          </article>
+          <a class="publication-card" href="{{ publication.url | relative_url }}">
+            <div class="publication-card__media">
+              {% if publication.image %}
+                <img src="{{ publication.image | relative_url }}" alt="">
+              {% else %}
+                <span>{{ publication.year | default: "Paper" }}</span>
+              {% endif %}
+            </div>
+            <div class="publication-card__body">
+              <p class="publication-card__meta">{{ publication.venue }}{% if publication.year %}, {{ publication.year }}{% endif %}</p>
+              <h3>{{ publication.title }}</h3>
+              {% if publication.excerpt %}
+                <p>{{ publication.excerpt | markdownify | strip_html }}</p>
+              {% endif %}
+            </div>
+          </a>
         {% endfor %}
       </div>
     {% else %}
-      <p class="home-empty">Publication entries are ready. Add papers to <code>_data/publications.yml</code> when available.</p>
+      <p class="home-empty">Publication entries are ready. Add papers as Markdown files in <code>_publications</code> when available.</p>
     {% endif %}
   </section>
 
