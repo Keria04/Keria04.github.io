@@ -6,7 +6,7 @@ layout: default
 {% assign home = site.data.home %}
 
 <main class="home" role="main">
-  <section class="home-hero"{% if home.profile.background_image and home.profile.background_image != "" %} style="background-image: linear-gradient(90deg, rgba(12, 18, 28, 0.72), rgba(12, 18, 28, 0.34)), url('{{ base_path }}/images/{{ home.profile.background_image }}');"{% endif %}>
+  <section class="home-hero"{% if home.profile.background_image and home.profile.background_image != "" %} style="background-image: url('{{ base_path }}/images/{{ home.profile.background_image }}');"{% endif %}>
     <div class="home-hero__inner">
       <div class="home-hero__copy">
         <p class="home-kicker">{{ home.profile.location }}</p>
@@ -15,7 +15,7 @@ layout: default
         <p class="home-summary">{{ home.profile.summary }}</p>
         <div class="home-actions" aria-label="Primary links">
           {% for link in home.hero_links %}
-            <a class="home-button{% if forloop.first %} home-button--primary{% endif %}" href="{% if link.url contains ':' %}{{ link.url }}{% else %}{{ link.url | relative_url }}{% endif %}">{{ link.label }}</a>
+            <a class="home-button" href="{% if link.url contains ':' %}{{ link.url }}{% else %}{{ link.url | relative_url }}{% endif %}">{{ link.label }}</a>
           {% endfor %}
         </div>
       </div>

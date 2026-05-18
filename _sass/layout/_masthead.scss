@@ -4,7 +4,7 @@
 
 .masthead {
   position: fixed;
-  background: var(--global-bg-color);
+  background: color-mix(in srgb, var(--global-bg-color) 90%, transparent);
   height: fit-content;
   top: 0;
   width: 100%;
@@ -14,6 +14,7 @@
   -webkit-animation-delay: 0.15s;
           animation-delay: 0.15s;
   z-index: 20;
+  backdrop-filter: blur(14px);
 
   &::after {
     content: "";
@@ -55,7 +56,7 @@
 }
 
 .masthead__menu-item {
-  background-color: var(--global-bg-color);
+  background-color: transparent;
   display: block;
   list-style-type: none;
   white-space: nowrap;
@@ -69,13 +70,13 @@
 .masthead__menu-item.selected a {
   color: var(--global-text-color);
   font-weight: 700;
-  border-bottom: 2px solid var(--global-text-color);
+  border-bottom: 2px solid var(--home-accent, var(--global-text-color));
   pointer-events: none; /* Move this here */
   cursor: default; /* Move this here too */
 }
 
 .masthead__menu-item.selected a:hover {
   color: var(--global-text-color);
-  border-bottom: 2px solid var(--global-text-color);
+  border-bottom: 2px solid var(--home-accent, var(--global-text-color));
   /* No need to repeat pointer-events and cursor here */
 }
