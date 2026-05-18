@@ -11,20 +11,28 @@ excerpt: "A lightweight template for weekly research and learning updates."
 
 Use this post as a starting point for weekly updates. Duplicate the file, rename it with a new date, and replace the sections below.
 
-## What I Worked On
+## Problem
 
 - Research reading:
 - Experiments or implementation:
 - Writing or application preparation:
 
-## Key Takeaways
+## Core Idea
 
 - 
 
-## Problems and Next Steps
+## Key Insight
 
 - 
 
-## Links
+## Weakness
+
+-
+
+## Relation
+-
+
+## Others
 
 - 
+
