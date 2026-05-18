@@ -82,7 +82,7 @@ defaults:
       type: posts
     values:
       layout: single
-      author_profile: true
+      author_profile: false
       read_time: true
       comments: true
       share: true
@@ -92,13 +92,13 @@ defaults:
       type: pages
     values:
       layout: single
-      author_profile: true
+      author_profile: false
   - scope:
       path: ""
       type: publications
     values:
       layout: publication
-      author_profile: true
+      author_profile: false
 
 sass:
   sass_dir: _sass

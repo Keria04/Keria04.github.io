@@ -16,6 +16,14 @@ hero_links:
   - label: "Publications"
     url: "/publications/"
 
+contact_links:
+  - label: "Email"
+    url: "mailto:yilec5859@gmail.com"
+  - label: "GitHub"
+    url: "https://github.com/Keria04"
+  - label: "ORCID"
+    url: "https://orcid.org/0009-0001-1907-0303"
+
 sections:
   - title: "Education"
     label: "Academic Timeline"
@@ -50,4 +58,3 @@ research_interests:
 interests:
   - title: "Anime"
     text: "Enthusiastic about wonderful characters and touching plots."
-

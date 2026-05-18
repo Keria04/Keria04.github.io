@@ -7,6 +7,7 @@ This site is set up so regular updates do not require changing layout code.
 Edit `_data/home.yml`.
 
 - `profile`: main introduction, avatar, and optional hero background image.
+- `contact_links`: homepage Email/GitHub/ORCID links.
 - `sections`: the cards that link to the main pages.
 - `education`: timeline entries.
 - `research_interests`: research cards.
@@ -19,6 +20,8 @@ background_image: "your-image.jpg"
 ```
 
 Leave it empty to use the clean default background.
+
+When `background_image` is set, the homepage shows it twice: as the hero background and as a clean full-width artwork band below the hero.
 
 ## Blog and Weekly Notes
 
