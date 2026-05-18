@@ -13,9 +13,15 @@ layout: default
 {% endif %}
 
 <div id="main" role="main">
-  {% include sidebar.html %}
+  {% assign has_sidebar = false %}
+  {% if page.author_profile or layout.author_profile or page.sidebar %}
+    {% assign has_sidebar = true %}
+  {% endif %}
+  {% if has_sidebar %}
+    {% include sidebar.html %}
+  {% endif %}
 
-  <div class="archive">
+  <div class="archive{% unless has_sidebar %} archive--wide{% endunless %}">
     {% unless page.header.overlay_color or page.header.overlay_image %}
       <h1 class="page__title">{{ page.title }}</h1>
     {% endunless %}

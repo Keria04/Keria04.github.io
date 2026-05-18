@@ -54,6 +54,22 @@ html[data-theme="dark"] {
   color: var(--global-text-color);
 }
 
+.page--wide,
+.archive--wide {
+  float: none;
+  width: 100%;
+  max-width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.archive--wide .list__item,
+.archive--wide .grid__item {
+  padding-right: 0;
+}
+
 .home-hero {
   position: relative;
   min-height: calc(100vh - 70px);

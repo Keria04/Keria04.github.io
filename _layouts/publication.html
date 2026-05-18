@@ -5,9 +5,7 @@ layout: default
 {% include base_path %}
 
 <div id="main" role="main">
-  {% include sidebar.html %}
-
-  <article class="page publication-detail" itemscope itemtype="http://schema.org/ScholarlyArticle">
+  <article class="page page--wide publication-detail" itemscope itemtype="http://schema.org/ScholarlyArticle">
     <div class="page__inner-wrap">
       <header>
         <p class="publication-card__meta">{{ page.venue }}{% if page.year %}, {{ page.year }}{% endif %}{% if page.status %} - {{ page.status }}{% endif %}</p>
