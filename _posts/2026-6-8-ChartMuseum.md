@@ -10,6 +10,9 @@ excerpt: "Note of reading the ChartMuseum."
 
 [ChartMuseum: Testing Visual Reasoning Capabilities of Large Vision-Language Models 2025 NIPS](https://arxiv.org/abs/2505.13444)
 
+## Overview
+这篇论文主要是在质疑：现有的 ChartQA benchmark 是否真的在测试模型的 visual reasoning 能力。作者发现，很多数据集里的问题其实只需要 OCR 和文本推理即可完成，因此设计了一个新的 benchmark——CHARTMUSEUM，专门强调真正依赖视觉结构理解的 chart reasoning。论文通过 synthetic visual reasoning 实验和大量真实图表 benchmark 证明：当前 LVLM 在真正的 visual reasoning 上仍然明显弱于人类。
+
 ## Problem
 
 Existing chart understanding benchmarks mainly evaluate OCR-based textual reasoning rather than genuine visual reasoning. Many ChartQA tasks can be solved by extracting explicit text from charts and performing language-based reasoning, arithmetic, or symbolic manipulation. As a result, frontier LVLMs already achieve near-saturated performance on several prior benchmarks, making them insufficient for evaluating true visual intelligence. The paper argues that current benchmarks under-evaluate visual reasoning capabilities and fail to expose the gap between human and model understanding of charts.
