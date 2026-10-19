@@ -5,7 +5,10 @@ categories:
   - weekly
 tags:
   - notes
-excerpt: "Note of reading the ChartMuseum."
+  - visual-reasoning
+  - multimodal-models
+  - benchmarks
+excerpt: "When does chart QA require visual reasoning beyond OCR? ChartMuseum uses human-written questions to probe vision-language models."
 ---
 
 [ChartMuseum: Testing Visual Reasoning Capabilities of Large Vision-Language Models 2025 NIPS](https://arxiv.org/abs/2505.13444)

@@ -5,7 +5,10 @@ categories:
   - weekly
 tags:
   - notes
-excerpt: "Note of reading the Prediction of Aerodynamic Flow Fields Using Convolutional Neural Networks."
+  - learned-simulation
+  - aerodynamics
+  - geometry-representation
+excerpt: "How can CNNs predict airfoil flow fields from shape and conditions? This study combines signed distance fields, shared decoding, and gradient loss."
 ---
 
 [Prediction of Aerodynamic Flow Fields Using Convolutional Neural Networks](https://arxiv.org/abs/1905.13166v1)

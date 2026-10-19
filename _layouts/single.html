@@ -50,7 +50,16 @@ layout: default
         </header>
       {% endunless %}
 
-      <section class="page__content" itemprop="text">
+      {% if page.collection == 'posts' %}
+        <details class="note-toc" data-note-toc hidden open>
+          <summary>On this page</summary>
+          <nav aria-label="Table of contents">
+            <ol data-note-toc-list></ol>
+          </nav>
+        </details>
+      {% endif %}
+
+      <section class="page__content" itemprop="text"{% if page.collection == 'posts' %} data-note-content{% endif %}>
         {{ content }}
 
         {% if page.citation and page.paperurl and page.slidesurl and page.bibtexurl %}
@@ -113,3 +122,7 @@ layout: default
     </div>
   {% endif %}
 </div>
+
+{% if page.collection == 'posts' %}
+  <script defer src="{{ '/assets/js/note-toc.js' | relative_url }}"></script>
+{% endif %}

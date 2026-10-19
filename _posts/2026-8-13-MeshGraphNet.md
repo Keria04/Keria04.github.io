@@ -5,7 +5,10 @@ categories:
   - weekly
 tags:
   - notes
-excerpt: "Note of reading the MeshGraphNet."
+  - learned-simulation
+  - graph-networks
+  - geometry-representation
+excerpt: "Which graph edges should a learned simulator use? MeshGraphNets separates mesh connectivity from spatial contact and supports adaptive remeshing."
 ---
 
 [Learning Mesh-Based Simulation with Graph Networks](http://arxiv.org/abs/2010.03409)

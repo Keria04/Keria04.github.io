@@ -135,7 +135,7 @@ $(document).ready(function () {
   });
 
   // Init smooth scroll, this needs to be slightly more than then fixed masthead height
-  $("a").smoothScroll({
+  $("a").not("[data-note-toc] a").smoothScroll({
     offset: -scssMastheadHeight,
     preventDefault: false,
   });

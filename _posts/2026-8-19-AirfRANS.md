@@ -5,7 +5,10 @@ categories:
   - weekly
 tags:
   - notes
-excerpt: "Note of reading the AirfRans."
+  - learned-simulation
+  - aerodynamics
+  - benchmarks
+excerpt: "Does low flow-field error imply useful aerodynamic predictions? AIRFRANS evaluates surrogates using lift, drag, and design rankings."
 ---
 
 [AIRFRANS: High Fidelity Computational Fluid  Dynamics Dataset for Approximating Reynolds-Averaged Navier–Stokes Solutions](http://arxiv.org/abs/2212.07564)

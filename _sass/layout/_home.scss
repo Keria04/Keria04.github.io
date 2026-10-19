@@ -398,6 +398,98 @@ html[data-theme="dark"] .home-hero__avatar {
   color: var(--global-text-color-light);
 }
 
+.note-topics {
+  margin: 1.5rem 0 2rem;
+}
+
+.note-topics h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1rem;
+}
+
+.note-topic-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.note-topic {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  max-width: 100%;
+  padding: 0.35rem 0.65rem;
+  border: 1px solid var(--global-border-color);
+  border-radius: 6px;
+  color: var(--global-text-color);
+  background: var(--home-surface);
+  font-size: 0.78rem;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+  text-decoration: none;
+}
+
+.note-topic:hover,
+.note-topic:focus-visible {
+  border-color: var(--home-accent);
+  color: var(--home-accent);
+  text-decoration: underline;
+}
+
+.note-topic__count {
+  color: var(--global-text-color-light);
+}
+
+.note-toc {
+  margin: 1.5rem 0 2rem;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--global-border-color);
+  border-radius: 8px;
+  background: var(--home-surface);
+  font-size: 0.85rem;
+}
+
+.note-toc[hidden] {
+  display: none;
+}
+
+.note-toc summary {
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.note-toc ol {
+  margin: 0.75rem 0 0;
+  padding-left: 1.3rem;
+}
+
+.note-toc li {
+  margin: 0.35rem 0;
+  break-inside: avoid;
+  overflow-wrap: anywhere;
+}
+
+.note-toc li ol {
+  margin-top: 0.25rem;
+}
+
+.note-toc nav > ol {
+  columns: 2;
+  column-gap: 2rem;
+}
+
+[data-note-content] h2,
+[data-note-content] h3,
+.archive__subtitle {
+  scroll-margin-top: 5rem;
+}
+
+@media (max-width: 640px) {
+  .note-toc nav > ol {
+    columns: 1;
+  }
+}
+
 .home-empty {
   margin: 0;
   padding: 1.25rem;

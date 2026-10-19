@@ -8,7 +8,7 @@ tags:
 excerpt: "One short summary of this weekly note."
 ---
 
-Use this draft as a starting point for weekly updates. Copy it to `_posts/YYYY-MM-DD-title.md`, then replace the sections below.
+Use this draft for weekly updates. For a paper reading note, use `_drafts/paper-note-template.md` instead. Copy the chosen draft to `_posts/YYYY-MM-DD-title.md`, then replace its placeholders and instructions.
 
 ## Problem
 

@@ -30,8 +30,8 @@ sections:
     text: "Degrees, academic background, and research direction."
     url: "/education/"
   - title: "Notes"
-    label: "Blog and Weekly Updates"
-    text: "Weekly reviews, research reflections, and technical posts."
+    label: "Research Notes"
+    text: "Reading notes, explanations, and comparisons from my ongoing research learning."
     url: "/notes/"
   - title: "Publications"
     label: "Papers and Preprints"
@@ -43,9 +43,9 @@ sections:
     url: "/interests/"
 
 notes:
-  title: "Weekly Updates and Essays"
-  description: "Weekly reviews, research reflections, and technical notes."
-  empty: "No notes yet. Add Markdown files to _posts using the format YYYY-MM-DD-title.md."
+  title: "Research Notes"
+  description: "Reading notes, explanations, and comparisons from my ongoing research learning."
+  empty: "Research notes will appear here as I continue reading and learning."
 
 education:
   - degree: "B.Eng. in Software Engineering"

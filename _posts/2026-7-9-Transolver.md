@@ -5,7 +5,10 @@ categories:
   - weekly
 tags:
   - notes
-excerpt: "Note of reading the Transolver."
+  - learned-simulation
+  - neural-operators
+  - geometry-representation
+excerpt: "How can PDE models use attention on large, irregular meshes? Transolver groups points into learned slices before computing attention."
 ---
 
 [Transolver: A Fast Transformer Solver for PDEs on General Geometries 2024 ICML Spotlight](https://arxiv.org/abs/2402.02366)

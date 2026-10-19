@@ -5,7 +5,9 @@ categories:
   - weekly
 tags:
   - notes
-excerpt: "Note of reading the StarVector."
+  - svg-generation
+  - multimodal-models
+excerpt: "How can images or text become compact SVG code? StarVector treats vector graphics generation as multimodal code generation."
 ---
 
 [StarVector: Generating Scalable Vector Graphics Code From Images And Text](https://arxiv.org/abs/2312.11556)(2025 CVPR)

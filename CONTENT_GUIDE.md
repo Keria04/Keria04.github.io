@@ -24,9 +24,9 @@ Leave it empty to use the clean default background.
 
 When `background_image` is set, the homepage shows it twice: as the hero background and as a clean full-width artwork band below the hero.
 
-## Blog and Weekly Notes
+## Research Notes
 
-Add Markdown files to `_posts/` using this filename format:
+For a paper reading note, copy [`_drafts/paper-note-template.md`](_drafts/paper-note-template.md) into `_posts/` using this filename format:
 
 ```text
 YYYY-MM-DD-short-title.md
@@ -36,19 +36,44 @@ Each post should start with front matter:
 
 ```yaml
 ---
-title: "Post Title"
-date: 2026-05-17
+title: "Paper Title"
+date: 2026-10-19
 categories:
   - weekly
 tags:
-  - research
-excerpt: "One short summary."
+  - notes
+  - visual-reasoning
+  - benchmarks
+excerpt: "When does chart QA require visual reasoning beyond OCR? Notes on how ChartMuseum tests this distinction."
 ---
 ```
 
-The homepage automatically shows the latest three posts. The full list appears at `/notes/`. Both places read from `_posts/`, so adding or editing a post updates them together after GitHub Pages rebuilds.
+Replace the example title, date, topics, and excerpt with the actual note information:
 
-You can copy `_drafts/weekly-note-template.md` when writing a weekly note. Rename the copy into `_posts/YYYY-MM-DD-title.md`.
+- `date` is the note's first publication date, matching the filename, not the paper's publication year. Future-dated posts are not published by the current configuration.
+- Keep `categories: [weekly]` for the existing URL convention. When updating an old note, preserve its filename, date, categories, and any explicit permalink. Categories and the filename slug participate in its URL.
+- Keep `notes` and add 2–4 useful topic tags. Reuse existing task, method, or subject tags from `/tags/`; avoid inventing a new spelling for an existing topic. The generic `notes` tag is retained but hidden from topic chips.
+- Write an English `excerpt` that starts with a concrete question or task and explains why the paper is relevant. Aim for about 100–160 characters; the list truncates at 180 characters. Avoid generic descriptions such as "Note of reading X."
+- The page displays `title` automatically. Start the body with the paper link and reading information; do not repeat the title as an H1.
+
+### Writing and checking a note
+
+1. Discuss the paper with AI in Chinese if preferred, keeping technical terms in English. Confirm your actual reading coverage and the personal explanations worth retaining.
+2. Ask AI to organize the confirmed material into clear English. Preserve the paper's assumptions, conditions, uncertainty, and source locations. Do not infer that every section was read just because the full paper was provided to AI.
+3. Use `Quick Reference`, `Problem`, `Core Idea`, `Method or Argument`, `Evidence and Results`, and `Limitations`. Add `Relation`, `My Learning Notes`, and `Open Questions` only when useful.
+4. Keep paper content substantial enough to reconstruct its reasoning. Put each important claim together with its evidence, conditions, result, and source. Only include personal judgments or learning progress that you actually confirmed. A targeted reading note should clearly state its narrower scope.
+5. Check the main mechanism, key evidence, scope of conclusions, and a few important English sentences against your understanding and the paper. Mark unverified details explicitly. Remove template instructions, placeholders, and unused sections.
+6. Save the file in `_posts/` and publish through the usual GitHub workflow. Check the resulting page, including formulas, images, source links, and section navigation. Keep its link in Zotero.
+
+### Finding and revisiting notes
+
+The homepage shows the latest three posts. `/notes/` shows all notes and a topic overview; clicking a topic opens the corresponding group in `/tags/`. Both lists show each note's question-oriented excerpt and topic links. These are generated from `_posts/`, so ordinary updates require no layout edits.
+
+Note pages automatically generate an expandable **On this page** menu from Markdown H2 and H3 headings when there are at least two. No `toc` field or manually maintained contents list is needed. JavaScript must be enabled for this menu; the note itself remains readable without it. Existing heading anchors are preserved. Use the menu to revisit the method, evidence, limitations, or your learning notes.
+
+When comparing papers, start from the same question, then compare the method, evidence, conditions, and limitations. Update the original note when correcting an understanding. Old notes can be reorganized when you actually reuse them; there is no need to rewrite the archive at once.
+
+For a weekly update rather than a paper note, `_drafts/weekly-note-template.md` remains available.
 
 ## Section Pages
 

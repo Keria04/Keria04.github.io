@@ -10,6 +10,16 @@
         {% if post.excerpt %}
           <p>{{ post.excerpt | markdownify | strip_html | truncate: 180 }}</p>
         {% endif %}
+        {% if post.tags.size > 0 %}
+          <div class="note-topic-links" aria-label="Note topics">
+            {% for topic in post.tags %}
+              {% unless topic == 'notes' %}
+                {% assign topic_anchor = topic | slugify %}
+                <a class="note-topic" href="{{ '/tags/' | relative_url }}#{{ topic_anchor }}">{{ topic | escape }}</a>
+              {% endunless %}
+            {% endfor %}
+          </div>
+        {% endif %}
       </article>
     {% endfor %}
   </div>

@@ -5,7 +5,10 @@ categories:
   - weekly
 tags:
   - notes
-excerpt: "Note of reading the DeepOnet for hypersonic waverider."
+  - learned-simulation
+  - neural-operators
+  - aerodynamics
+excerpt: "How can DeepONet learn hypersonic flow fields with shocks? This study separates spatial-basis learning from condition-dependent coefficient fitting."
 ---
 
 [Deep operator learning-based surrogate models for aerothermodynamic analysis of AEDC hypersonic waverider](http://arxiv.org/abs/2405.13234)

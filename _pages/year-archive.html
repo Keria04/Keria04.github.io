@@ -1,7 +1,7 @@
 ---
 layout: archive
 permalink: /notes/
-title: "Notes"
+title: "Research Notes"
 author_profile: false
 redirect_from:
   - /year-archive/
@@ -11,6 +11,23 @@ redirect_from:
 {% include base_path %}
 {% assign home = site.data.home %}
 
-<p>{{ home.notes.description }} Add new posts as Markdown files in <code>_posts</code> using the filename format <code>YYYY-MM-DD-title.md</code>.</p>
+<p>{{ home.notes.description }}</p>
+
+{% assign note_topics = site.tags | sort %}
+{% if note_topics.size > 0 %}
+  <nav class="note-topics" aria-label="Browse notes by topic">
+    <h2>Browse by topic</h2>
+    <div class="note-topic-links">
+      {% for topic in note_topics %}
+        {% unless topic[0] == 'notes' %}
+          {% assign topic_anchor = topic[0] | slugify %}
+          <a class="note-topic" href="{{ '/tags/' | relative_url }}#{{ topic_anchor }}">{{ topic[0] | escape }} <span class="note-topic__count">({{ topic[1].size }})</span></a>
+        {% endunless %}
+      {% endfor %}
+    </div>
+  </nav>
+{% endif %}
+
+<h2>All notes</h2>
 
 {% include notes-list.html %}

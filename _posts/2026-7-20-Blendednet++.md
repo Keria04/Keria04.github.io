@@ -5,7 +5,11 @@ categories:
   - weekly
 tags:
   - notes
-excerpt: "Note of reading the BlendedNet++."
+  - learned-simulation
+  - aerodynamics
+  - benchmarks
+  - inverse-design
+excerpt: "How can surface-flow surrogates support aircraft inverse design? BlendedNet++ pairs BWB simulations with surrogate benchmarks and a design pipeline."
 ---
 
 [BlendedNet++: A dataset and benchmark for field-resolved aerodynamics and inverse design of blended wing](http://arxiv.org/abs/2512.03280)
