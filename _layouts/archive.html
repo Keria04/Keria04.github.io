@@ -12,7 +12,7 @@ layout: default
   {% endunless %}
 {% endif %}
 
-<div id="main" role="main">
+<div id="main"{% if page.editorial %} class="editorial-main"{% endif %} role="main">
   {% assign has_sidebar = false %}
   {% if page.author_profile or layout.author_profile or page.sidebar %}
     {% assign has_sidebar = true %}
@@ -23,7 +23,15 @@ layout: default
 
   <div class="archive{% unless has_sidebar %} archive--wide{% endunless %}">
     {% unless page.header.overlay_color or page.header.overlay_image %}
-      <h1 class="page__title">{{ page.title }}</h1>
+      {% if page.editorial %}
+        <header class="editorial-header" data-page-reveal>
+          {% if page.eyebrow %}<p class="editorial-eyebrow">{{ page.eyebrow }}</p>{% endif %}
+          <h1 class="page__title">{{ page.title }}</h1>
+          {% if page.description %}<p class="editorial-lead">{{ page.description }}</p>{% endif %}
+        </header>
+      {% else %}
+        <h1 class="page__title">{{ page.title }}</h1>
+      {% endif %}
     {% endunless %}
     {{ content }}
   </div>

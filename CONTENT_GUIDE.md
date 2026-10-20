@@ -73,7 +73,7 @@ Replace the example title, date, topics, and excerpt with the actual note inform
 
 The homepage shows the latest three posts. `/notes/` shows all notes and a topic overview; clicking a topic opens the corresponding group in `/tags/`. Both lists show each note's question-oriented excerpt and topic links. These are generated from `_posts/`, so ordinary updates require no layout edits.
 
-Note pages automatically generate an expandable **On this page** menu from Markdown H2 and H3 headings when there are at least two. No `toc` field or manually maintained contents list is needed. JavaScript must be enabled for this menu; the note itself remains readable without it. Existing heading anchors are preserved. Use the menu to revisit the method, evidence, limitations, or your learning notes.
+Note pages automatically generate an expandable **On this page** menu from Markdown H2 and H3 headings when there are at least two. On wide screens, the menu sits beside the article and marks the current section; on smaller screens, it sits above the article. A thin progress line tracks the article's reading position. No `toc` field or manually maintained contents list is needed. JavaScript must be enabled for these aids; the note itself remains readable without it. Existing heading anchors are preserved. Use the menu to revisit the method, evidence, limitations, or your learning notes.
 
 When comparing papers, start from the same question, then compare the method, evidence, conditions, and limitations. Update the original note when correcting an understanding. Old notes can be reorganized when you actually reuse them; there is no need to rewrite the archive at once.
 
@@ -84,6 +84,8 @@ The old `_drafts/weekly-note-template.md` is retained as a draft reference. Its 
 - `/education/` is generated from `education` and `research_interests` in `_data/home.yml`.
 - `/interests/` is generated from `interests` in `_data/home.yml`.
 - `/notes/`, `/publications/`, and `/cv/` are independent pages.
+
+The Anime entry on `/interests/` uses the existing Frieren cover artwork in a separate illustration panel. Its motion control pauses both the illustration movement and petals. Additional interest entries can be added to the same data list and are displayed as text entries. No additional content is required to fill the layout.
 
 ## Publications
 
@@ -120,6 +122,10 @@ You can copy `_drafts/publication-template.md` when adding a new publication.
 ## Appearance
 
 Homepage-specific editorial styles live in `_sass/layout/_home-editorial.scss`; shared section and note styles remain in `_sass/layout/_home.scss`. The Instrument Serif display font is self-hosted in `assets/fonts/instrument-serif/`, alongside its license.
+
+The subpage design lives in `_sass/layout/_subpages-editorial.scss`. The selected section pages opt in with `editorial: true`; paper notes and publication details opt in automatically. Optional `eyebrow` and `description` fields supply the section page header. These styles are scoped to subpages so the homepage remains independent.
+
+`assets/js/page-motion.js` handles subpage entrances, interest-page motion, and keyboard access to the theme control. `assets/js/note-toc.js` handles the reading menu and progress line. Paragraphs, formulas, and tables remain stationary. Reduced-motion preferences disable decorative movement, and content stays available if JavaScript is disabled. Tags still link to the tag archive; they are not in-page filters.
 
 `assets/js/home-wind.js` adds red petals to the cover. Pointer movement creates a wind effect; a short tap also creates a breeze. Visitors can pause the petals with the cover button. Animation stops when the cover leaves the viewport or the tab is hidden. The system's reduced-motion preference switches the petals to a static display and disables entrance animations. The homepage remains readable without JavaScript.
 

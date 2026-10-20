@@ -3,6 +3,8 @@ layout: archive
 permalink: /notes/
 title: "Research Notes"
 author_profile: false
+editorial: true
+eyebrow: "Reading & Learning"
 redirect_from:
   - /year-archive/
   - /wordpress/blog-posts/
@@ -11,12 +13,15 @@ redirect_from:
 {% include base_path %}
 {% assign home = site.data.home %}
 
-<p>{{ home.notes.description }}</p>
+<p class="editorial-lead editorial-lead--after-header" data-page-reveal>{{ home.notes.description }}</p>
 
 {% assign note_topics = site.tags | sort %}
 {% if note_topics.size > 0 %}
   <nav class="note-topics" aria-label="Browse notes by topic">
-    <h2>Browse by topic</h2>
+    <div class="note-topics__heading">
+      <h2>Browse by topic</h2>
+      <a class="editorial-link" href="{{ '/tags/' | relative_url }}">All topics <span aria-hidden="true">↗</span></a>
+    </div>
     <div class="note-topic-links">
       {% for topic in note_topics %}
         {% unless topic[0] == 'notes' %}
@@ -28,6 +33,6 @@ redirect_from:
   </nav>
 {% endif %}
 
-<h2>All notes</h2>
+<h2 class="editorial-section-title">All notes</h2>
 
-{% include notes-list.html %}
+{% include notes-list.html wrapper="home-list home-list--subpage" subpage=true %}

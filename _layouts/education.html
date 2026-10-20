@@ -4,20 +4,20 @@ layout: default
 
 {% assign home = site.data.home %}
 
-<div id="main" role="main">
+<div id="main" class="editorial-main" role="main">
   <article class="page page--wide">
     <div class="page__inner-wrap">
-      <header>
+      <header class="editorial-header" data-page-reveal>
+        <p class="editorial-eyebrow">{{ page.eyebrow }}</p>
         <h1 class="page__title">{{ page.title }}</h1>
+        <p class="editorial-lead">Degrees, academic background, and research direction.</p>
       </header>
 
       <section class="page__content home-section-page" itemprop="text">
-        <p class="home-section-page__lead">Degrees, academic background, and research direction.</p>
-
-        <h2>Academic Timeline</h2>
+        <h2 class="editorial-section-title">Academic Timeline</h2>
         <div class="home-timeline">
           {% for item in home.education %}
-            <article class="home-timeline__item">
+            <article class="home-timeline__item" data-page-reveal>
               <div class="home-timeline__period">{{ item.period }}</div>
               <div class="home-timeline__content">
                 <h3>{{ item.degree }}</h3>
@@ -34,10 +34,10 @@ layout: default
           {% endfor %}
         </div>
 
-        <h2>Research Interests</h2>
+        <h2 class="editorial-section-title">Research Interests</h2>
         <div class="home-grid">
           {% for item in home.research_interests %}
-            <article class="home-card">
+            <article class="home-card" data-page-reveal>
               <h3>{{ item.title }}</h3>
               <p>{{ item.text }}</p>
             </article>

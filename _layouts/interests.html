@@ -4,24 +4,45 @@ layout: default
 
 {% assign home = site.data.home %}
 
-<div id="main" role="main">
+<div id="main" class="editorial-main" role="main">
   <article class="page page--wide">
     <div class="page__inner-wrap">
-      <header>
+      <header class="editorial-header" data-page-reveal>
+        <p class="editorial-eyebrow">{{ page.eyebrow }}</p>
         <h1 class="page__title">{{ page.title }}</h1>
+        <p class="editorial-lead">A compact place for personal interests and learning outside research work.</p>
       </header>
 
-      <section class="page__content home-section-page" itemprop="text">
-        <p class="home-section-page__lead">A compact place for personal interests and learning outside research work.</p>
-
-        <div class="home-grid home-grid--three">
-          {% for item in home.interests %}
-            <article class="home-card">
-              <h3>{{ item.title }}</h3>
+      <section class="page__content home-section-page interest-collection">
+        {% for item in home.interests %}
+          {% assign has_art = false %}
+          {% if item.title == 'Anime' and home.profile.background_image and home.profile.background_image != '' %}
+            {% assign has_art = true %}
+          {% endif %}
+          <article class="interest-feature{% unless has_art %} interest-feature--text{% endunless %}"{% if has_art %} data-interest-motion{% endif %} data-page-reveal>
+            {% if has_art %}
+              <figure class="interest-art" data-interest-art>
+                <div class="interest-art__frame">
+                  <img src="{{ '/images/' | append: home.profile.background_image | relative_url }}" alt="Frieren among red flowers beneath a blue sky" width="1915" height="821" decoding="async">
+                  <canvas class="interest-art__canvas" data-interest-canvas aria-hidden="true"></canvas>
+                  <button class="interest-art__toggle" data-interest-toggle type="button" aria-label="Pause motion" hidden>
+                    <span data-interest-icon aria-hidden="true">Ⅱ</span>
+                    <span data-interest-label>Pause motion</span>
+                  </button>
+                </div>
+                <span class="interest-petal interest-petal--one" aria-hidden="true"></span>
+                <span class="interest-petal interest-petal--two" aria-hidden="true"></span>
+                <span class="interest-petal interest-petal--three" aria-hidden="true"></span>
+                <figcaption>Frieren</figcaption>
+              </figure>
+            {% endif %}
+            <div class="interest-copy">
+              <span class="interest-number" aria-hidden="true">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</span>
+              <h2>{{ item.title }}</h2>
               <p>{{ item.text }}</p>
-            </article>
-          {% endfor %}
-        </div>
+            </div>
+          </article>
+        {% endfor %}
       </section>
     </div>
   </article>

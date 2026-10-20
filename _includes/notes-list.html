@@ -1,12 +1,13 @@
-{% assign note_limit = include.limit | default: site.posts.size %}
+{% assign note_posts = include.items | default: site.posts %}
+{% assign note_limit = include.limit | default: note_posts.size %}
 {% assign empty_text = include.empty | default: site.data.home.notes.empty %}
 
-{% if site.posts.size > 0 %}
+{% if note_posts.size > 0 %}
   <div class="{{ include.wrapper | default: 'home-list' }}">
-    {% for post in site.posts limit: note_limit %}
-      <article class="{{ include.item_class | default: 'home-list__item' }}"{% if include.editorial %} data-home-reveal{% endif %}>
+    {% for post in note_posts limit: note_limit %}
+      <article class="{{ include.item_class | default: 'home-list__item' }}"{% if include.editorial %} data-home-reveal{% elsif include.subpage %} data-page-reveal{% endif %}>
         <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
-        <h3><a href="{{ post.url | relative_url }}">{{ post.title }}{% if include.editorial %}<span class="home-note-arrow" aria-hidden="true">↗</span>{% endif %}</a></h3>
+        <h3><a href="{{ post.url | relative_url }}">{{ post.title }}{% if include.editorial or include.subpage %}<span class="home-note-arrow" aria-hidden="true">↗</span>{% endif %}</a></h3>
         {% if post.excerpt %}
           <p>{{ post.excerpt | markdownify | strip_html | truncate: 180 }}</p>
         {% endif %}

@@ -3,15 +3,19 @@ layout: compress
 ---
 
 {% include base_path %}
+{% assign editorial_page = false %}
+{% if page.editorial or page.collection == 'posts' or page.layout == 'publication' %}
+  {% assign editorial_page = true %}
+{% endif %}
 
 <!doctype html>
-<html lang="{{ site.locale | slice: 0,2 }}" class="no-js"{% if site.site_theme == "dark" %} data-theme="dark"{% endif %}>
+<html lang="{{ site.locale | slice: 0,2 }}" class="no-js{% if editorial_page %} editorial-document{% endif %}"{% if site.site_theme == "dark" %} data-theme="dark"{% endif %}>
   <head>
     {% include head.html %}
     {% include head/custom.html %}
   </head>
 
-  <body{% if page.layout == 'home' %} class="home-page"{% endif %}>
+  <body{% if page.layout == 'home' %} class="home-page"{% elsif editorial_page %} class="editorial-page"{% endif %}>
 
     {% include browser-upgrade.html %}
     {% include masthead.html %}
@@ -26,6 +30,9 @@ layout: compress
     </div>
 
     {% include scripts.html %}
+    {% if editorial_page %}
+      <script defer src="{{ '/assets/js/page-motion.js' | relative_url }}"></script>
+    {% endif %}
 
   </body>
 </html>

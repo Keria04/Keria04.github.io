@@ -4,10 +4,10 @@ layout: default
 
 {% include base_path %}
 
-<div id="main" role="main">
+<div id="main" class="editorial-main" role="main">
   <article class="page page--wide publication-detail" itemscope itemtype="http://schema.org/ScholarlyArticle">
     <div class="page__inner-wrap">
-      <header>
+      <header class="editorial-header" data-page-reveal>
         <p class="publication-card__meta">{{ page.venue }}{% if page.year %}, {{ page.year }}{% endif %}{% if page.status %} - {{ page.status }}{% endif %}</p>
         <h1 class="page__title" itemprop="headline">{{ page.title }}</h1>
         {% if page.authors %}
@@ -17,7 +17,7 @@ layout: default
 
       {% if page.image %}
         <div class="publication-detail__image">
-          <img src="{{ page.image | relative_url }}" alt="">
+          <img src="{{ page.image | relative_url }}" alt="" decoding="async">
         </div>
       {% endif %}
 

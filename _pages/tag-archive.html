@@ -3,6 +3,8 @@ layout: archive
 permalink: /tags/
 title: "Posts by Tags"
 author_profile: false
+editorial: true
+eyebrow: "Topic Index"
 ---
 
 {% include base_path %}
@@ -10,8 +12,6 @@ author_profile: false
 
 {% for tag in group_names %}
   {% assign posts = group_items[forloop.index0] %}
-  <h2 id="{{ tag | slugify }}" class="archive__subtitle">{{ tag }}</h2>
-  {% for post in posts %}
-    {% include archive-single.html %}
-  {% endfor %}
+  <h2 id="{{ tag | slugify }}" class="archive__subtitle editorial-group">{{ tag }}</h2>
+  {% include notes-list.html items=posts wrapper="home-list home-list--subpage" subpage=true %}
 {% endfor %}

@@ -3,6 +3,8 @@ layout: archive
 permalink: /categories/
 title: "Posts by Category"
 author_profile: false
+editorial: true
+eyebrow: "Archive"
 ---
 
 {% include base_path %}
@@ -15,8 +17,6 @@ author_profile: false
       <span id="weekly" aria-hidden="true"></span>
     {% endunless %}
   {% endif %}
-  <h2 id="{{ category | slugify }}" class="archive__subtitle">{{ category }}</h2>
-  {% for post in posts %}
-    {% include archive-single.html %}
-  {% endfor %}
+  <h2 id="{{ category | slugify }}" class="archive__subtitle editorial-group">{{ category }}</h2>
+  {% include notes-list.html items=posts wrapper="home-list home-list--subpage" subpage=true %}
 {% endfor %}

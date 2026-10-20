@@ -14,7 +14,11 @@ layout: default
   {% endunless %}
 {% endif %}
 
-<div id="main" role="main">
+{% if page.collection == 'posts' %}
+  <div class="reading-progress" data-reading-progress aria-hidden="true" hidden><span></span></div>
+{% endif %}
+
+<div id="main"{% if page.collection == 'posts' %} class="editorial-main"{% endif %} role="main">
   {% assign has_sidebar = false %}
   {% if page.author_profile or layout.author_profile or page.sidebar %}
     {% assign has_sidebar = true %}
@@ -23,7 +27,7 @@ layout: default
     {% include sidebar.html %}
   {% endif %}
 
-  <article class="page{% unless has_sidebar %} page--wide{% endunless %}" itemscope itemtype="http://schema.org/CreativeWork">
+  <article class="page{% unless has_sidebar %} page--wide{% endunless %}{% if page.collection == 'posts' %} reading-page{% endif %}" itemscope itemtype="http://schema.org/CreativeWork">
     {% if page.title %}<meta itemprop="headline" content="{{ page.title | markdownify | strip_html | strip_newlines | escape_once }}">{% endif %}
     {% if page.excerpt %}<meta itemprop="description" content="{{ page.excerpt | markdownify | strip_html | strip_newlines | escape_once }}">{% endif %}
     {% if page.date %}<meta itemprop="datePublished" content="{{ page.date | date: "%B %d, %Y" }}">{% endif %}
@@ -31,7 +35,8 @@ layout: default
 
     <div class="page__inner-wrap">
       {% unless page.header.overlay_color or page.header.overlay_image %}
-        <header>
+        <header{% if page.collection == 'posts' %} class="editorial-header reading-header"{% endif %}>
+          {% if page.collection == 'posts' %}<p class="editorial-eyebrow"><a href="{{ '/notes/' | relative_url }}">Research Notes</a></p>{% endif %}
           {% if page.title %}<h1 class="page__title" itemprop="headline">{{ page.title | markdownify | remove: "<p>" | remove: "</p>" }}</h1>{% endif %}
           {% if page.read_time %}
             <p class="page__meta"><i class="fa fa-clock" aria-hidden="true"></i> {% include read-time.html %}</p>
@@ -51,12 +56,16 @@ layout: default
       {% endunless %}
 
       {% if page.collection == 'posts' %}
-        <details class="note-toc" data-note-toc hidden open>
-          <summary>On this page</summary>
-          <nav aria-label="Table of contents">
-            <ol data-note-toc-list></ol>
-          </nav>
-        </details>
+        <div class="reading-layout">
+          <aside class="reading-sidebar" data-reading-sidebar hidden>
+            <details class="note-toc" data-note-toc hidden open>
+              <summary>On this page</summary>
+              <nav aria-label="Table of contents">
+                <ol data-note-toc-list></ol>
+              </nav>
+            </details>
+          </aside>
+          <div class="reading-body">
       {% endif %}
 
       <section class="page__content" itemprop="text"{% if page.collection == 'posts' %} data-note-content{% endif %}>
@@ -101,6 +110,10 @@ layout: default
       {% if page.share %}{% include social-share.html %}{% endif %}
 
       {% include post_pagination.html %}
+      {% if page.collection == 'posts' %}
+          </div>
+        </div>
+      {% endif %}
     </div>
 
     {% if site.comments.provider and page.comments %}
