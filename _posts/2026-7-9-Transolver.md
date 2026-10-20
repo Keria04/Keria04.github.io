@@ -2,7 +2,9 @@
 title: "Transolver: A Fast Transformer Solver for PDEs on General Geometries"
 date: 2026-07-9
 categories:
-  - weekly
+  - paper-notes
+redirect_from:
+  - /weekly/Transolver/
 tags:
   - notes
   - learned-simulation

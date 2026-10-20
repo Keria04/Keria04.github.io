@@ -2,13 +2,13 @@
 title: "Paper Title"
 date: "YYYY-MM-DD"
 categories:
-  - weekly
+  - paper-notes
 tags:
   - notes
 excerpt: "A concrete question or task, followed by how this paper helps address it."
 ---
 
-<!-- Replace the date with the note's first publication date. Add 2–4 reusable topic tags when useful. Remove instructions and unused sections before publishing. -->
+<!-- Replace the date with the note's first publication date. paper-notes is the content type; tags describe topics. Add 2–4 reusable topic tags when useful. When updating an existing note, preserve its current category, date, filename, permalink, and redirect_from values. Remove instructions and unused sections before publishing. -->
 
 **Paper:** [Original paper](PAPER_URL)
 

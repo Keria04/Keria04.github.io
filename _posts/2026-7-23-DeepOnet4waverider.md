@@ -2,7 +2,9 @@
 title: "Deep operator learning-based surrogate models for aerothermodynamic analysis of AEDC hypersonic waverider"
 date: 2026-07-23
 categories:
-  - weekly
+  - paper-notes
+redirect_from:
+  - /weekly/DeepOnet4waverider/
 tags:
   - notes
   - learned-simulation

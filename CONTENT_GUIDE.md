@@ -37,9 +37,9 @@ Each post should start with front matter:
 ```yaml
 ---
 title: "Paper Title"
-date: 2026-10-19
+date: 2026-10-20
 categories:
-  - weekly
+  - paper-notes
 tags:
   - notes
   - visual-reasoning
@@ -51,7 +51,8 @@ excerpt: "When does chart QA require visual reasoning beyond OCR? Notes on how C
 Replace the example title, date, topics, and excerpt with the actual note information:
 
 - `date` is the note's first publication date, matching the filename, not the paper's publication year. Future-dated posts are not published by the current configuration.
-- Keep `categories: [weekly]` for the existing URL convention. When updating an old note, preserve its filename, date, categories, and any explicit permalink. Categories and the filename slug participate in its URL.
+- Use `categories: [paper-notes]` for notes produced from reading papers with the literature-learning workflow. Categories describe content types; tags describe research topics. This is currently the only published category. Add another category only when publishing a different content type.
+- Paper notes use `/paper-notes/<slug>/` URLs. The ten existing notes have `redirect_from` entries for their former `/weekly/<slug>/` URLs. When updating a note, preserve its filename, date, current category, any explicit permalink, and all existing `redirect_from` entries. A new note does not need an old-URL redirect.
 - Keep `notes` and add 2–4 useful topic tags. Reuse existing task, method, or subject tags from `/tags/`; avoid inventing a new spelling for an existing topic. The generic `notes` tag is retained but hidden from topic chips.
 - Write an English `excerpt` that starts with a concrete question or task and explains why the paper is relevant. Aim for about 100–160 characters; the list truncates at 180 characters. Avoid generic descriptions such as "Note of reading X."
 - The page displays `title` automatically. Start the body with the paper link and reading information; do not repeat the title as an H1.
@@ -73,7 +74,7 @@ Note pages automatically generate an expandable **On this page** menu from Markd
 
 When comparing papers, start from the same question, then compare the method, evidence, conditions, and limitations. Update the original note when correcting an understanding. Old notes can be reorganized when you actually reuse them; there is no need to rewrite the archive at once.
 
-For a weekly update rather than a paper note, `_drafts/weekly-note-template.md` remains available.
+The old `_drafts/weekly-note-template.md` is retained as a draft reference. Its category is intentionally empty; choose an appropriate content type if you later publish a weekly update. It does not create a second published category. The homepage and `/notes/` currently aggregate all published posts; `/categories/` groups them by content type.
 
 ## Section Pages
 

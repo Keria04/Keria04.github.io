@@ -2,7 +2,9 @@
 title: "ChartMuseum: Testing Visual Reasoning Capabilities of Large Vision-Language Models"
 date: 2026-06-8
 categories:
-  - weekly
+  - paper-notes
+redirect_from:
+  - /weekly/ChartMuseum/
 tags:
   - notes
   - visual-reasoning

@@ -2,7 +2,9 @@
 title: "Learning Mesh-Based Simulation with Graph Networks"
 date: 2026-08-13
 categories:
-  - weekly
+  - paper-notes
+redirect_from:
+  - /weekly/MeshGraphNet/
 tags:
   - notes
   - learned-simulation

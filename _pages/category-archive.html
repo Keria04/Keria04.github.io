@@ -10,6 +10,11 @@ author_profile: false
 
 {% for category in group_names %}
   {% assign posts = group_items[forloop.index0] %}
+  {% if category == 'paper-notes' %}
+    {% unless site.categories.weekly %}
+      <span id="weekly" aria-hidden="true"></span>
+    {% endunless %}
+  {% endif %}
   <h2 id="{{ category | slugify }}" class="archive__subtitle">{{ category }}</h2>
   {% for post in posts %}
     {% include archive-single.html %}

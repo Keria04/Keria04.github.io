@@ -2,7 +2,9 @@
 title: "Prediction of Aerodynamic Flow Fields Using Convolutional Neural Networks"
 date: 2026-08-31
 categories:
-  - weekly
+  - paper-notes
+redirect_from:
+  - /weekly/CNN4FlowFields/
 tags:
   - notes
   - learned-simulation

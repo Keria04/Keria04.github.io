@@ -2,7 +2,9 @@
 title: "StarVector: Generating Scalable Vector Graphics Code From Images And Text"
 date: 2026-05-18
 categories:
-  - weekly
+  - paper-notes
+redirect_from:
+  - /weekly/StarVector/
 tags:
   - notes
   - svg-generation

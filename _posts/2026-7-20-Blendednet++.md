@@ -2,7 +2,9 @@
 title: "BlendedNet++: A dataset and benchmark for field-resolved aerodynamics and inverse design of blended wing body aircraft"
 date: 2026-07-20
 categories:
-  - weekly
+  - paper-notes
+redirect_from:
+  - /weekly/Blendednet++/
 tags:
   - notes
   - learned-simulation

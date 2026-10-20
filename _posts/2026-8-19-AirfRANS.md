@@ -2,7 +2,9 @@
 title: "AIRFRANS: High Fidelity Computational Fluid  Dynamics Dataset for Approximating Reynolds-Averaged Navier–Stokes Solutions"
 date: 2026-08-19
 categories:
-  - weekly
+  - paper-notes
+redirect_from:
+  - /weekly/AirfRANS/
 tags:
   - notes
   - learned-simulation
