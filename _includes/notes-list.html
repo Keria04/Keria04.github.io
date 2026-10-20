@@ -4,9 +4,9 @@
 {% if site.posts.size > 0 %}
   <div class="{{ include.wrapper | default: 'home-list' }}">
     {% for post in site.posts limit: note_limit %}
-      <article class="{{ include.item_class | default: 'home-list__item' }}">
+      <article class="{{ include.item_class | default: 'home-list__item' }}"{% if include.editorial %} data-home-reveal{% endif %}>
         <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
-        <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+        <h3><a href="{{ post.url | relative_url }}">{{ post.title }}{% if include.editorial %}<span class="home-note-arrow" aria-hidden="true">↗</span>{% endif %}</a></h3>
         {% if post.excerpt %}
           <p>{{ post.excerpt | markdownify | strip_html | truncate: 180 }}</p>
         {% endif %}

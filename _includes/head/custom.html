@@ -2,6 +2,10 @@
 
 <!-- start custom head snippets -->
 
+{% if page.layout == 'home' %}
+<link rel="preload" href="{{ '/assets/fonts/instrument-serif/InstrumentSerif-Regular.ttf' | relative_url }}" as="font" type="font/ttf" crossorigin>
+{% endif %}
+
 <!-- Support for Academicons -->
 <link rel="stylesheet" href="{{ base_path }}/assets/css/academicons.css"/>
 

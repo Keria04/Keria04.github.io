@@ -5,85 +5,84 @@ layout: default
 {% include base_path %}
 {% assign home = site.data.home %}
 
-<main class="home" role="main">
-  <section class="home-hero"{% if home.profile.background_image and home.profile.background_image != "" %} style="background-image: url('{{ base_path }}/images/{{ home.profile.background_image }}');"{% endif %}>
-    <div class="home-hero__inner">
-      <div class="home-hero__copy">
-        <div class="home-hero__identity">
-          {% if home.profile.avatar %}
-            <img class="home-hero__avatar" src="{{ base_path }}/images/{{ home.profile.avatar }}" alt="{{ home.profile.name }}">
-          {% endif %}
-          <div>
-            <p class="home-kicker">{{ home.profile.location }}</p>
-            <h1>{{ home.profile.name }}</h1>
-          </div>
-        </div>
-        <p class="home-headline">{{ home.profile.headline }}</p>
-        <p class="home-summary">{{ home.profile.summary }}</p>
-        <div class="home-actions" aria-label="Primary links">
+<main class="home home--editorial" id="main" role="main">
+  <section class="home-cover" data-home-wind aria-labelledby="home-name">
+    <div class="home-cover__art" aria-hidden="true">
+      {% if home.profile.background_image and home.profile.background_image != "" %}
+        <img src="{{ '/images/' | append: home.profile.background_image | relative_url }}" alt="" width="1915" height="821" fetchpriority="high" decoding="async">
+      {% endif %}
+    </div>
+    <canvas class="home-cover__petals" data-wind-canvas aria-hidden="true"></canvas>
+    <div class="home-cover__inner">
+      <div class="home-cover__copy" data-wind-still>
+        <p class="home-cover__location">{{ home.profile.location }}</p>
+        <h1 class="home-cover__name" id="home-name">{{ home.profile.name }}</h1>
+        <p class="home-cover__headline">{{ home.profile.headline }}</p>
+        <p class="home-cover__summary">{{ home.profile.summary }}</p>
+        <div class="home-cover__links" aria-label="Primary links">
           {% for link in home.hero_links %}
-            <a class="home-button" href="{% if link.url contains ':' %}{{ link.url }}{% else %}{{ link.url | relative_url }}{% endif %}">{{ link.label }}</a>
+            <a class="home-cover__link{% if forloop.first %} home-cover__link--primary{% endif %}" href="{% if link.url contains ':' %}{{ link.url }}{% else %}{{ link.url | relative_url }}{% endif %}">{{ link.label }} <span aria-hidden="true">↗</span></a>
           {% endfor %}
         </div>
-        <div class="home-contact" aria-label="Contact links">
+        <div class="home-cover__contact" aria-label="Contact links">
           {% for link in home.contact_links %}
             <a href="{{ link.url }}">{{ link.label }}</a>
           {% endfor %}
         </div>
       </div>
     </div>
+    <button class="home-cover__motion" type="button" data-wind-toggle aria-label="Pause petals" hidden>
+      <span class="home-cover__motion-icon" aria-hidden="true">Ⅱ</span>
+      <span data-wind-label>Pause petals</span>
+    </button>
   </section>
 
-  {% if home.profile.background_image and home.profile.background_image != "" %}
-    <section class="home-art" aria-label="Background artwork">
-      <img src="{{ base_path }}/images/{{ home.profile.background_image }}" alt="">
-    </section>
-  {% endif %}
-
-  <section class="home-section home-section--compact" aria-labelledby="sections-heading">
-    <div class="home-section__heading">
-      <p class="home-section__eyebrow">Explore</p>
-      <h2 id="sections-heading">Main Sections</h2>
-    </div>
-    <div class="home-grid">
-      {% for section in home.sections %}
-        <a class="home-card home-card--link" href="{{ section.url | relative_url }}">
-          <p class="home-card__label">{{ section.label }}</p>
-          <h3>{{ section.title }}</h3>
-          <p>{{ section.text }}</p>
-        </a>
-      {% endfor %}
-    </div>
-  </section>
-
-  <section class="home-section" aria-labelledby="notes-heading">
-    <div class="home-section__heading home-section__heading--split">
+  <section class="home-section home-section--notes" aria-labelledby="notes-heading">
+    <div class="home-section__heading home-section__heading--split" data-home-reveal>
       <div>
-        <p class="home-section__eyebrow">Notes</p>
+        <p class="home-section__eyebrow">Reading &amp; Learning</p>
         <h2 id="notes-heading">{{ home.notes.title }}</h2>
         <p>{{ home.notes.description }}</p>
       </div>
-      <a class="home-text-link" href="{{ '/notes/' | relative_url }}">All notes</a>
+      <a class="home-text-link" href="{{ '/notes/' | relative_url }}">All notes <span aria-hidden="true">↗</span></a>
     </div>
-    {% include notes-list.html limit=3 %}
+    {% include notes-list.html limit=3 wrapper="home-list home-list--editorial" editorial=true %}
   </section>
 
-  <section class="home-section" aria-labelledby="publications-heading">
-    <div class="home-section__heading home-section__heading--split">
-      <div>
-        <p class="home-section__eyebrow">Publications</p>
-        <h2 id="publications-heading">Papers and Preprints</h2>
+  {% if home.sections.size > 0 %}
+    <section class="home-section home-section--index" aria-labelledby="sections-heading">
+      <div class="home-section__heading" data-home-reveal>
+        <p class="home-section__eyebrow">Explore</p>
+        <h2 id="sections-heading">Main Sections</h2>
       </div>
-      <a class="home-text-link" href="{{ '/publications/' | relative_url }}">Publication list</a>
-    </div>
-    {% assign publications = site.publications | sort: "year" | reverse %}
-    {% if publications.size > 0 %}
+      <div class="home-index">
+        {% for section in home.sections %}
+          <a class="home-index__item" href="{{ section.url | relative_url }}" data-home-reveal>
+            <p class="home-card__label">{{ section.label }}</p>
+            <h3>{{ section.title }} <span aria-hidden="true">↗</span></h3>
+            <p>{{ section.text }}</p>
+          </a>
+        {% endfor %}
+      </div>
+    </section>
+  {% endif %}
+
+  {% assign publications = site.publications | sort: "year" | reverse %}
+  {% if publications.size > 0 %}
+    <section class="home-section home-section--publications" aria-labelledby="publications-heading">
+      <div class="home-section__heading home-section__heading--split" data-home-reveal>
+        <div>
+          <p class="home-section__eyebrow">Publications</p>
+          <h2 id="publications-heading">Papers and Preprints</h2>
+        </div>
+        <a class="home-text-link" href="{{ '/publications/' | relative_url }}">Publication list <span aria-hidden="true">↗</span></a>
+      </div>
       <div class="publication-grid publication-grid--compact">
         {% for publication in publications limit:3 %}
-          <a class="publication-card" href="{{ publication.url | relative_url }}">
+          <a class="publication-card" href="{{ publication.url | relative_url }}" data-home-reveal>
             <div class="publication-card__media">
               {% if publication.image %}
-                <img src="{{ publication.image | relative_url }}" alt="">
+                <img src="{{ publication.image | relative_url }}" alt="" loading="lazy" decoding="async">
               {% else %}
                 <span>{{ publication.year | default: "Paper" }}</span>
               {% endif %}
@@ -91,16 +90,13 @@ layout: default
             <div class="publication-card__body">
               <p class="publication-card__meta">{{ publication.venue }}{% if publication.year %}, {{ publication.year }}{% endif %}</p>
               <h3>{{ publication.title }}</h3>
-              {% if publication.excerpt %}
-                <p>{{ publication.excerpt | markdownify | strip_html }}</p>
-              {% endif %}
+              {% if publication.excerpt %}<p>{{ publication.excerpt | markdownify | strip_html }}</p>{% endif %}
             </div>
           </a>
         {% endfor %}
       </div>
-    {% else %}
-      <p class="home-empty">Publication entries are ready. Add papers as Markdown files in <code>_publications</code> when available.</p>
-    {% endif %}
-  </section>
-
+    </section>
+  {% endif %}
 </main>
+
+<script defer src="{{ '/assets/js/home-wind.js' | relative_url }}"></script>

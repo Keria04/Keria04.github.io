@@ -6,9 +6,10 @@ This site is set up so regular updates do not require changing layout code.
 
 Edit `_data/home.yml`.
 
-- `profile`: main introduction, avatar, and optional hero background image.
+- `profile`: main introduction and optional hero background image. The avatar field is retained for future use.
+- `hero_links`: the primary links below the introduction.
 - `contact_links`: homepage Email/GitHub/ORCID links.
-- `sections`: the cards that link to the main pages.
+- `sections`: the editorial index linking to the main pages.
 - `notes`: title, description, and empty-state text for the homepage Notes block and `/notes/`.
 - `education`: timeline entries.
 - `research_interests`: research cards.
@@ -22,7 +23,9 @@ background_image: "your-image.jpg"
 
 Leave it empty to use the clean default background.
 
-When `background_image` is set, the homepage shows it twice: as the hero background and as a clean full-width artwork band below the hero.
+The homepage shows the artwork once, in the cover. On smaller screens, the introduction sits below the image. The current cover uses `Frieren_background_clean.png`; the original image is retained in `images/`.
+
+The latest three notes appear immediately below the cover. Publications appear on the homepage automatically once `_publications/` contains entries.
 
 ## Research Notes
 
@@ -116,7 +119,11 @@ You can copy `_drafts/publication-template.md` when adding a new publication.
 
 ## Appearance
 
-The main homepage styles live in `_sass/layout/_home.scss`. Site-wide theme selection is in `_config.yml`:
+Homepage-specific editorial styles live in `_sass/layout/_home-editorial.scss`; shared section and note styles remain in `_sass/layout/_home.scss`. The Instrument Serif display font is self-hosted in `assets/fonts/instrument-serif/`, alongside its license.
+
+`assets/js/home-wind.js` adds red petals to the cover. Pointer movement creates a wind effect; a short tap also creates a breeze. Visitors can pause the petals with the cover button. Animation stops when the cover leaves the viewport or the tab is hidden. The system's reduced-motion preference switches the petals to a static display and disables entrance animations. The homepage remains readable without JavaScript.
+
+The homepage supports light and dark mode with its own paper, ink, and red accent palette. Site-wide theme selection is in `_config.yml`:
 
 ```yaml
 site_theme: "mint"
