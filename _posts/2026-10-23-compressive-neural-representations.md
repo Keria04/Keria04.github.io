@@ -48,14 +48,14 @@ This combines data fitting with a learned, continuous field representation. Unli
 
 ### Field representation and compression budget
 
-The input is a regular-grid scalar field represented as a $d$-dimensional tensor:
+The input is a regular-grid scalar field represented as a $$d$$-dimensional tensor:
 
 $$
 X\in\mathbb{R}^{s_1\times s_2\times\cdots\times s_d},
 \qquad C=\prod_{j=1}^{d}s_j.
 $$
 
-Here $s_j$ is the sample count along dimension $j$, and $C$ is the total number of sampled scalar values. A sample has integer index $\mathbf i=(i_1,\ldots,i_d)$, original value $X[\mathbf i]$, and corresponding real-valued domain coordinate $\mathbf p_i\in\mathbb R^d$. The index locates a stored grid sample; the coordinate is the network input. In 3D, $d=3$; for a time-varying field, the authors can use $d=4$ with time as an additional coordinate (Section 3, Fig. 2).
+Here $$s_j$$ is the sample count along dimension $$j$$, and $$C$$ is the total number of sampled scalar values. A sample has integer index $$\mathbf i=(i_1,\ldots,i_d)$$, original value $$X[\mathbf i]$$, and corresponding real-valued domain coordinate $$\mathbf p_i\in\mathbb R^d$$. The index locates a stored grid sample; the coordinate is the network input. In 3D, $$d=3$$; for a time-varying field, the authors can use $$d=4$$ with time as an additional coordinate (Section 3, Fig. 2).
 
 The model is a learned function and parameter vector:
 
@@ -65,11 +65,11 @@ f_{\Theta}:\mathbb R^d\rightarrow\mathbb R,
 \qquad f_{\Theta}(\mathbf p_i)\approx X[\mathbf i].
 $$
 
-The basic compression condition is $m<C$: fewer learned parameters than original samples. If each were stored at the same precision, the idealized sample-count-to-weight-count ratio would be $C/m$. Actual file size also depends on quantization, unquantized parameters, cluster centers, and representation overhead; thus $C/m$ is **not automatically the final compression ratio** (Sections 3 and 3.1.1).
+The basic compression condition is $$m<C$$: fewer learned parameters than original samples. If each were stored at the same precision, the idealized sample-count-to-weight-count ratio would be $$C/m$$. Actual file size also depends on quantization, unquantized parameters, cluster centers, and representation overhead; thus $$C/m$$ is **not automatically the final compression ratio** (Sections 3 and 3.1.1).
 
 ### Encoding: fit the sampled scalar field
 
-The neural **encoder** is the optimization process that learns $\Theta$ for one volume. Its starting objective is the squared error at sampled locations (Eq. (1)):
+The neural **encoder** is the optimization process that learns $$\Theta$$ for one volume. Its starting objective is the squared error at sampled locations (Eq. (1)):
 
 $$
 \min_{\Theta}\sum_{\mathbf i}
@@ -82,7 +82,7 @@ Training uses randomly selected minibatches of grid samples and gradient-based o
 
 The authors build on **SIREN**, a fully connected implicit neural representation with sinusoidal activations and a carefully designed initialization. Sine activations make the represented function differentiable to arbitrary order, which becomes useful when fitting gradients. The initialization is intended to maintain useful activation statistics across layers (Section 3.1).
 
-Two main design inputs are the layer count $l$ and target number of weights $m$. A common hidden width $k$ is derived so that the matrices collectively use approximately the desired budget; the authors report little benefit from varying the widths across intermediate layers. At fixed weight budget, making the model deeper does not always improve accuracy and can make training harder (Fig. 3).
+Two main design inputs are the layer count $$l$$ and target number of weights $$m$$. A common hidden width $$k$$ is derived so that the matrices collectively use approximately the desired budget; the authors report little benefit from varying the widths across intermediate layers. At fixed weight budget, making the model deeper does not always improve accuracy and can make training harder (Fig. 3).
 
 To improve depth robustness, the authors adapt residual connections to keep activations in the range expected for their SIREN-based design. Suppressing bias terms as in the paper, one residual block is (Eq. (2)):
 
@@ -92,15 +92,15 @@ $$
 \sin(\mathbf M^{1}_{i+1}\mathbf a_i)\right)\right].
 $$
 
-The skip path carries the preceding activation; the sine branch contains two learnable layers. The factor $1/2$ averages the two paths rather than directly adding them, helping keep the output bounded in $[-1,1]$ when both inputs are in that range. The experiments generally use **eight residual blocks**, each counted as two layers (Section 3.1; Fig. 3). This bounding property should not be mistaken for a proof that every trained layer retains an exact theoretical activation distribution.
+The skip path carries the preceding activation; the sine branch contains two learnable layers. The factor $$1/2$$ averages the two paths rather than directly adding them, helping keep the output bounded in $$[-1,1]$$ when both inputs are in that range. The experiments generally use **eight residual blocks**, each counted as two layers (Section 3.1; Fig. 3). This bounding property should not be mistaken for a proof that every trained layer retains an exact theoretical activation distribution.
 
 ### Weight quantization: reduce bits per parameter
 
 After fitting the network, the authors quantize the large **intermediate weight matrices**, but leave the first and last weight matrices at higher precision because those small matrices were empirically sensitive to quantization (Section 3.1.1; Fig. 2). The weight histograms in Fig. 4(a)–(c), shown for trained layers of the *ionization* volume, are approximately zero-mean and bell-shaped, with deeper layers more concentrated near zero. This is an **empirical observation about learned weights**, not a proof that SIREN's activation distribution forces normally distributed trained weights.
 
-For each intermediate layer separately, $k$-means clusters its weights into $2^b$ groups. Each weight is stored as a **$b$-bit index** identifying a cluster center; the floating-point cluster centers are stored as well. Thus **9-bit quantization uses 512 centers** per quantized layer. These indexes approximate the weight values; the scheme is not simply removing all small weights (Section 3.1.1).
+For each intermediate layer separately, $$k$$-means clusters its weights into $$2^b$$ groups. Each weight is stored as a **$$b$$-bit index** identifying a cluster center; the floating-point cluster centers are stored as well. Thus **9-bit quantization uses 512 centers** per quantized layer. These indexes approximate the weight values; the scheme is not simply removing all small weights (Section 3.1.1).
 
-Choosing $b$ also changes the affordable network size. With roughly fixed compressed storage, more bits **per weight** require **fewer weights**. Lower $b$ allows a larger but coarsely quantized model; higher $b$ allows more precise weights in a smaller model. Fig. 4(d) compares these options and supports **9 bits as a practical trade-off in the tested configuration**, not a universal optimum. A simplified relation is $m\,b\approx\text{index-bit budget}$, but the true stored size must account for other parameters and cluster centers.
+Choosing $$b$$ also changes the affordable network size. With roughly fixed compressed storage, more bits **per weight** require **fewer weights**. Lower $$b$$ allows a larger but coarsely quantized model; higher $$b$$ allows more precise weights in a smaller model. Fig. 4(d) compares these options and supports **9 bits as a practical trade-off in the tested configuration**, not a universal optimum. A simplified relation is $$m\,b\approx\text{index-bit budget}$$, but the true stored size must account for other parameters and cluster centers.
 
 ### Optional gradient regularization
 
@@ -113,13 +113,13 @@ $$
 \right],\qquad \lambda=0.05.
 $$
 
-Here $X'[\mathbf i]$ denotes the target gradient, either supplied with the field or estimated numerically; $\nabla f_{\Theta}$ is obtained by differentiating the continuous network function. The paper uses **central differences** to estimate target gradients in the reported jet and *rt* tests. The authors warn that such estimates may be unreliable for noisy sources such as some medical images. Sine activations make differentiation convenient, but **do not by themselves guarantee correct gradients**; the additional loss explicitly encourages agreement (Section 3.1.2).
+Here $$X'[\mathbf i]$$ denotes the target gradient, either supplied with the field or estimated numerically; $$\nabla f_{\Theta}$$ is obtained by differentiating the continuous network function. The paper uses **central differences** to estimate target gradients in the reported jet and *rt* tests. The authors warn that such estimates may be unreliable for noisy sources such as some medical images. Sine activations make differentiation convenient, but **do not by themselves guarantee correct gradients**; the additional loss explicitly encourages agreement (Section 3.1.2).
 
 This matters for isosurfaces because the local gradient is perpendicular to a regular level surface. A small-amplitude, high-frequency error in scalar values can create disproportionately large errors in gradient direction and visibly noisy isosurfaces; gradient agreement addresses a different aspect of reconstruction fidelity than scalar PSNR alone.
 
 ### Decoding, random access, and direct rendering
 
-The **decoder** evaluates $f_{\Theta}$ at grid locations to reconstruct the original sampling grid, or at arbitrary real-valued coordinates without reconstructing the entire volume first (Section 3.2; Fig. 2). For direct neural volume rendering, a ray marcher evaluates the network at positions along viewing rays. The renderer can also differentiate the network at those positions and normalize nonzero gradients for illumination and shading (Fig. 6).
+The **decoder** evaluates $$f_{\Theta}$$ at grid locations to reconstruct the original sampling grid, or at arbitrary real-valued coordinates without reconstructing the entire volume first (Section 3.2; Fig. 2). For direct neural volume rendering, a ray marcher evaluates the network at positions along viewing rays. The renderer can also differentiate the network at those positions and normalize nonzero gradients for illumination and shading (Fig. 6).
 
 The paper treats good-looking direct renderings as evidence **suggesting** reasonable behavior between sampled locations: the model appears to act as an interpolant, not only a memorizer of supplied grid values. Rendering quality does **not** establish exact off-grid accuracy or a formal guarantee against overfitting.
 
@@ -135,7 +135,7 @@ The paper treats good-looking direct renderings as evidence **suggesting** reaso
 
 ### Why residual blocks and 9-bit weights were chosen
 
-**Question and conditions.** With roughly fixed weight count $m=C/50$, how does increasing depth affect reconstruction, and do residual connections make depth choices more robust? Fig. 3 tests two volumes (*asteroid* and *ionization*) over multiple network depths, with unquantized and 8-bit-quantized variants.
+**Question and conditions.** With roughly fixed weight count $$m=C/50$$, how does increasing depth affect reconstruction, and do residual connections make depth choices more robust? Fig. 3 tests two volumes (*asteroid* and *ionization*) over multiple network depths, with unquantized and 8-bit-quantized variants.
 
 **Paper finding.** Non-residual networks eventually lose PSNR as depth increases, and their preferred depth differs by volume. The residual design is more stable across depths and generally improves PSNR in these tests. Quantization produces a modest, **volume-dependent** reduction in performance; the *ionization* volume is notably sensitive (Section 3.1; Fig. 3).
 
@@ -159,7 +159,7 @@ The paper treats good-looking direct renderings as evidence **suggesting** reaso
 
 **Time-varying data.** By using four input coordinates instead of three, the authors fit *asteroid* (10 time steps) and *isabel* (12 time steps) as **4D volumes**, and compare them with 4D TTHRESH across three compression settings (Table 2; Section 4.2; Fig. 11). NeurComp performs better for the reported *asteroid* sequence. For *isabel*, the methods are closer at lower compression, while NeurComp has larger advantages at higher compression levels. The methods' ratios differ slightly, so the curves are not comparisons at exactly identical file sizes. This experiment establishes performance over **the selected time steps of these sequences**, not generalization to unrelated simulations.
 
-**Spatial resolution.** Fig. 12 compares a $512^3$ *isotropic_p* volume with **centered $256^3$ and $128^3$ crops**. The authors hold $C/m$ at selected values (50, 100, 150, 200) and use 9-bit intermediate weights. Larger crops achieve better PSNR in these tests, even though they may attain higher effective compression ratios due partly to the amortized cost of cluster centers (Section 4.3). The experiment compares **different-sized spatial crops**, not multiple sampling densities of the *same* physical subregion; absolute network parameter count also changes with $C$. Its evidence therefore supports the observed scaling behavior under this design, rather than proving that denser sampling alone causes better compression.
+**Spatial resolution.** Fig. 12 compares a $$512^3$$ *isotropic_p* volume with **centered $$256^3$$ and $$128^3$$ crops**. The authors hold $$C/m$$ at selected values (50, 100, 150, 200) and use 9-bit intermediate weights. Larger crops achieve better PSNR in these tests, even though they may attain higher effective compression ratios due partly to the amortized cost of cluster centers (Section 4.3). The experiment compares **different-sized spatial crops**, not multiple sampling densities of the *same* physical subregion; absolute network parameter count also changes with $$C$$. Its evidence therefore supports the observed scaling behavior under this design, rather than proving that denser sampling alone causes better compression.
 
 **Continuous evaluation.** Fig. 6 demonstrates direct ray-marched rendering, with and without gradient-based illumination. This is evidence of an additional use of the representation, not a timing benchmark showing that neural rendering is faster than conventional volume rendering. The authors describe rendering quality as *suggestive* evidence of plausible interpolation (Section 3.2).
 
@@ -182,17 +182,17 @@ The paper treats good-looking direct renderings as evidence **suggesting** reaso
 
 ### How are SIREN activation statistics related to the distribution of its learned weights?
 
-**Paper finding:** The trained intermediate-layer weights shown in Fig. 4(a)–(c) are approximately zero-mean and normally distributed, with deeper layers exhibiting less spread and more concentration near zero. This motivates per-layer, data-dependent $k$-means quantization.
+**Paper finding:** The trained intermediate-layer weights shown in Fig. 4(a)–(c) are approximately zero-mean and normally distributed, with deeper layers exhibiting less spread and more concentration near zero. This motivates per-layer, data-dependent $$k$$-means quantization.
 
-**Additional explanation:** A **weight** is a learned parameter; a **pre-activation** is a weighted sum before applying the nonlinearity; an **activation** is the result after applying $\sin$. Under appropriate assumptions, sinusoidal activations can have an **arcsine-shaped** distribution; this is distinct from a normal distribution over **trained weights**. Activations influence parameter updates through backpropagation, so their statistics can affect training, but they do not by themselves determine the final weight histogram.
+**Additional explanation:** A **weight** is a learned parameter; a **pre-activation** is a weighted sum before applying the nonlinearity; an **activation** is the result after applying $$\sin$$. Under appropriate assumptions, sinusoidal activations can have an **arcsine-shaped** distribution; this is distinct from a normal distribution over **trained weights**. Activations influence parameter updates through backpropagation, so their statistics can affect training, but they do not by themselves determine the final weight histogram.
 
 **Interpretation to verify:** The paper reports the weight pattern empirically and relates it to SIREN's activation statistics, but does **not** prove that a specified activation distribution necessarily produces normally distributed learned weights. The learning point worth retaining is the authors' research process: **inspect a model's learned statistics, identify a possible compression opportunity, then test an implementation choice**. This was explicitly selected as a point of personal interest; no causal proof was established in the reading discussion.
 
 ### With fixed storage, should a network have more coarse weights or fewer precise weights?
 
-**Paper finding:** Fig. 4(d) varies bit-width $b$ and weight count $m$ in opposite directions while keeping compressed size approximately equal, and identifies **9-bit quantization** as a useful trade-off for the experiments.
+**Paper finding:** Fig. 4(d) varies bit-width $$b$$ and weight count $$m$$ in opposite directions while keeping compressed size approximately equal, and identifies **9-bit quantization** as a useful trade-off for the experiments.
 
-**Additional explanation:** Under a simplified index-only budget $B$, $m\approx B/b$. A 6-bit network can afford more indexed weights than a 9-bit network of the same budget, but represents each with fewer possible centers; a 9-bit network may represent its individual weights more precisely but has fewer of them. This separates **representation capacity** from **numerical precision**. The actual budget also includes per-layer cluster centers and unquantized parameters, so the simplified expression is only an intuition, not a reproduction of the paper's storage calculation.
+**Additional explanation:** Under a simplified index-only budget $$B$$, $$m\approx B/b$$. A 6-bit network can afford more indexed weights than a 9-bit network of the same budget, but represents each with fewer possible centers; a 9-bit network may represent its individual weights more precisely but has fewer of them. This separates **representation capacity** from **numerical precision**. The actual budget also includes per-layer cluster centers and unquantized parameters, so the simplified expression is only an intuition, not a reproduction of the paper's storage calculation.
 
 **When useful:** Compare model compression methods or design ablations at **matched total storage**, rather than comparing bit-widths while silently allowing file size to increase. No independent application test was conducted during this reading.
 
@@ -200,6 +200,6 @@ The paper treats good-looking direct renderings as evidence **suggesting** reaso
 
 **Paper finding:** The gradient objective in Eq. (3), the separate FD-Grad and Net-Grad measurements in Table 1, and the surface comparisons in Figs. 5 and 13 show why scalar-field PSNR is not sufficient to characterize derivative quality. **FD-Grad** means finite differences of reconstructed *grid values*; **Net-Grad** means derivatives of the learned *continuous network function*. Both are compared with gradients numerically estimated from the supplied field.
 
-**Additional explanation:** Consider the illustrative one-dimensional target $f(x)=x$ and reconstruction $\hat f(x)=x+0.01\sin(100x)$. The value error is at most $0.01$, but $\hat f'(x)-f'(x)=\cos(100x)$ can be as large as $1$ in magnitude. The example is **not an experiment in the paper**; it explains why a small amplitude error can create pronounced derivative errors, altered normals, and ripples in extracted isosurfaces.
+**Additional explanation:** Consider the illustrative one-dimensional target $$f(x)=x$$ and reconstruction $$\hat f(x)=x+0.01\sin(100x)$$. The value error is at most $$0.01$$, but $$\hat f'(x)-f'(x)=\cos(100x)$$ can be as large as $$1$$ in magnitude. The example is **not an experiment in the paper**; it explains why a small amplitude error can create pronounced derivative errors, altered normals, and ripples in extracted isosurfaces.
 
 **When useful:** For compression or learned field reconstruction, examine the quantity the downstream task actually depends on: values, derivatives, surface geometry, or other physical features. Gradient regularization improves agreement with the available gradient targets under the reported conditions, but unreliable targets can undermine it. No independent application test was conducted during this reading.

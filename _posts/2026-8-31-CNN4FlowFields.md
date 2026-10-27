@@ -46,7 +46,7 @@ There is also a nice multi-task-learning intuition in the shared decoder. Pressu
 
 ### Pros
 
-The work is strong as an early demonstration of **full-field aerodynamic surrogate modeling under multiple operating variables**, rather than merely predicting force coefficients. The training space spans three airfoils, four Reynolds numbers, and angles of attack from $0^\circ$ to $20^\circ$, making the task substantially richer than the simplified laminar examples common in earlier work. 
+The work is strong as an early demonstration of **full-field aerodynamic surrogate modeling under multiple operating variables**, rather than merely predicting force coefficients. The training space spans three airfoils, four Reynolds numbers, and angles of attack from $$0^\circ$$ to $$20^\circ$$, making the task substantially richer than the simplified laminar examples common in earlier work. 
 
 The geometry representation is elegant and reusable. SDF avoids tying the network to a particular airfoil parameterization and naturally converts a CFD geometry into a regular image-like representation suitable for convolution. This makes the basic idea transferable to other embedded geometries. 
 
@@ -72,7 +72,7 @@ The method is best remembered as three ideas rather than as a layer-by-layer arc
 
 **Geometry as SDF.** The airfoil is rasterized as a signed distance field on a Cartesian grid. This gives the CNN a dense spatial representation whose sign indicates inside/outside and whose magnitude indicates distance to the surface. 
 
-**Conditioned encoder–decoder.** A convolutional encoder extracts a latent representation from the SDF. Reynolds number and angle of attack are injected into this representation, and a decoder reconstructs three output channels corresponding to $U$, $V$, and pressure. The shared-decoder version deliberately treats these outputs as different manifestations of one underlying flow state rather than three independent prediction problems. 
+**Conditioned encoder–decoder.** A convolutional encoder extracts a latent representation from the SDF. Reynolds number and angle of attack are injected into this representation, and a decoder reconstructs three output channels corresponding to $$U$$, $$V$$, and pressure. The shared-decoder version deliberately treats these outputs as different manifestations of one underlying flow state rather than three independent prediction problems. 
 
 **Value loss plus gradient loss.** MSE encourages global numerical agreement, while gradient sharpening penalizes incorrect spatial derivatives and therefore protects sharp structures from being washed out. L2 regularization is added in the larger multi-condition model.  
 
@@ -92,7 +92,7 @@ In hindsight, a natural next step is therefore a geometry-general neural operato
 
 ## Others
 
-One result worth remembering is that the unseen-shape test is not merely qualitative. For the averaged “new airfoil,” S807, and S819, the reported whole-field MAPE is roughly 5–10% depending on variable, with wake-region errors generally of similar scale except for $U$, which is harder. This supports the idea that the learned representation contains some transferable geometry–flow structure, but it should not be overinterpreted given the narrow training family. 
+One result worth remembering is that the unseen-shape test is not merely qualitative. For the averaged “new airfoil,” S807, and S819, the reported whole-field MAPE is roughly 5–10% depending on variable, with wake-region errors generally of similar scale except for $$U$$, which is harder. This supports the idea that the learned representation contains some transferable geometry–flow structure, but it should not be overinterpreted given the narrow training family. 
 
 Another memorable detail is where the model struggles: the wake is generally harder than the smooth far field, especially for the streamwise velocity and pressure. That is exactly where steep gradients, separation, and accumulated downstream effects appear, which helps explain why the gradient-aware loss is more valuable there than in smooth regions. 
 

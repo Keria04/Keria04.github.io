@@ -10,6 +10,8 @@ excerpt: "A concrete question or task, followed by how this paper helps address 
 
 <!-- Replace the date with the note's first publication date. paper-notes is the content type; tags describe topics. Add 2–4 reusable topic tags when useful. When updating an existing note, preserve its current category, date, filename, permalink, and redirect_from values. Remove instructions and unused sections before publishing. -->
 
+<!-- Math on this Kramdown site: use $$...$$ inside a sentence for inline math, e.g. The volume has $$128^3$$ voxels. For a display equation, put $$ on separate lines with blank lines around the whole block. Preserve all TeX commands. In Markdown tables use \lVert, \rVert, \vert or \mid instead of raw pipe characters. See CONTENT_GUIDE.md. Remove this instruction before publishing. -->
+
 **Paper:** [Original paper](PAPER_URL)
 
 **Authors:** Author names.

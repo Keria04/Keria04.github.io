@@ -69,6 +69,23 @@ Replace the example title, date, topics, and excerpt with the actual note inform
 5. Check the main mechanism, key evidence, scope of conclusions, and a few important English sentences against your understanding and the paper. Mark unverified details explicitly. Remove template instructions, placeholders, and unused sections.
 6. Save the file in `_posts/` and publish through the usual GitHub workflow. Check the resulting page, including formulas, images, source links, and section navigation. Keep its link in Zotero.
 
+### Writing formulas
+
+This GitHub Pages site uses Kramdown before MathJax. For new notes, use Kramdown's native math delimiters so Markdown preserves TeX commands and subscripts:
+
+- **Inline:** keep `$$...$$` within the same paragraph as the sentence, for example `The volume has $$128^3$$ voxels.` or `Let $$S=\{x_1,\ldots,x_n\}$$.` It renders inline on this site.
+- **Display:** put `$$` on separate lines, with a blank line before and after the whole equation block.
+
+```text
+The predicted value is $$\hat{x}_i$$.
+
+$$
+\mathcal{L}=\frac{1}{N}\sum_{i=1}^{N}(x_i-\hat{x}_i)^2
+$$
+```
+
+In Markdown tables, use TeX commands such as `\lVert x\rVert`, `\vert`, or `\mid` instead of raw pipe characters, which also separate table cells. Code spans and fenced code blocks display source literally and are not typeset. Ordinary single-dollar `$...$` formulas are recognized for compatibility, but Markdown can consume escapes such as `\{` before MathJax sees them; prefer the native inline form above for new notes. These are this site's conventions, not a promise about other Markdown viewers. Check the published page after uploading.
+
 ### Finding and revisiting notes
 
 The homepage shows the latest three posts. `/notes/` shows all notes and a topic overview; clicking a topic opens the corresponding group in `/tags/`. Both lists show each note's question-oriented excerpt and topic links. These are generated from `_posts/`, so ordinary updates require no layout edits.

@@ -67,7 +67,7 @@ $$
 \widehat{\mathcal V}=\{\widehat V_1,\ldots,\widehat V_M\}.
 $$
 
-Here, $N$ counts available original volumes and $M$ counts generated volumes. The augmented samples are used to help train downstream predictors, not treated as new measured or simulated ground truth (Section III; Fig. 2).
+Here, $$N$$ counts available original volumes and $$M$$ counts generated volumes. The augmented samples are used to help train downstream predictors, not treated as new measured or simulated ground truth (Section III; Fig. 2).
 
 ### Nine augmentation methods
 
@@ -75,7 +75,7 @@ The first five methods directly transform existing data. The last four train a m
 
 | Group | Method | How an additional volume is produced |
 |---|---|---|
-| Traditional | **Noise injection (NI)** | Add voxel-wise Gaussian noise; the specified distribution has mean $0$ and variance $0.15$. |
+| Traditional | **Noise injection (NI)** | Add voxel-wise Gaussian noise; the specified distribution has mean $$0$$ and variance $$0.15$$. |
 | Traditional | **Interpolation** | Linearly combine two volumes using a randomly chosen interpolation weight. |
 | Traditional | **Scale** | Randomly resize the volume along its dimensions. |
 | Traditional | **Flip** | Reverse voxel order along randomly chosen axes. |
@@ -106,7 +106,7 @@ $$
 V_{\mathrm{LR}}\longrightarrow \widehat V_{\mathrm{HR}}.
 $$
 
-The compared downstream models are **SSR-TVD, ESPCN, and SRGAN**. Synthetic data are used for **200 epochs of pretraining**, followed by **300 epochs of fine-tuning on original data**. The reported learning rate is $10^{-4}$ with multistep decay. The method-comparison experiments use a **spatial upscaling factor of four** (Section IV-B; Figs. 4–5).
+The compared downstream models are **SSR-TVD, ESPCN, and SRGAN**. Synthetic data are used for **200 epochs of pretraining**, followed by **300 epochs of fine-tuning on original data**. The reported learning rate is $$10^{-4}$$ with multistep decay. The method-comparison experiments use a **spatial upscaling factor of four** (Section IV-B; Figs. 4–5).
 
 **AOP.** Before supervision can be constructed, a **transfer function** converts each scalar volume into an **opacity volume**. A local AO algorithm (the paper's reference [21]) produces the corresponding target **AO volume**. A predictor learns:
 
@@ -114,7 +114,7 @@ $$
 V_{\mathrm{opacity}}\longrightarrow \widehat V_{\mathrm{AO}}.
 $$
 
-The downstream networks are **V2V, U-Net, and DVAO**. They receive **200 epochs of pretraining on augmented data** and **400 epochs of fine-tuning on original data**; the reported learning rate is $10^{-5}$ with multistep decay (Section IV-B).
+The downstream networks are **V2V, U-Net, and DVAO**. They receive **200 epochs of pretraining on augmented data** and **400 epochs of fine-tuning on original data**; the reported learning rate is $$10^{-5}$$ with multistep decay (Section IV-B).
 
 This paired-target construction explains why unconditional synthetic volumes can train these two tasks. It does **not** supply labels such as time, viewpoint, or ensemble parameters. The authors therefore exclude coordinate-conditioned networks such as **CoordNet** from their downstream architectures in this study: those models require a meaningful relation between a volume and the conditioning coordinates, which unconditional augmentation does not preserve (Section IV-B, p. 8986). This does not exclude all INRs from all downstream tasks.
 
@@ -149,7 +149,7 @@ D=\left(\frac{1}{n(n-1)/2}
 \operatorname{SSIM}(I_i,I_j)\right)^{-1}.
 $$
 
-Here $n$ is the number of samples, and $I_i$ is the image rendered from sample $i$. A lower mean pairwise SSIM gives a higher diversity score. This is **Eq. (1)**, a quantitative definition; it should be kept distinct from how each diversity condition is constructed.
+Here $$n$$ is the number of samples, and $$I_i$$ is the image rendered from sample $$i$$. A lower mean pairwise SSIM gives a higher diversity score. This is **Eq. (1)**, a quantitative definition; it should be kept distinct from how each diversity condition is constructed.
 
 ## Evidence and Results
 
